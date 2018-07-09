@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-class PhotoButton extends React.Component{
+class Photo extends React.Component{
   state ={
     file: '',
     imagePreviewUrl: ''
@@ -61,8 +61,8 @@ class PhotoButton extends React.Component{
   }
 }
 
-// PhotoButton.propTypes = {
+// Photo.propTypes = {
 
 // };
 
-export default PhotoButton;
+export default Photo;

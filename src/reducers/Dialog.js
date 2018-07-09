@@ -4,7 +4,8 @@ import {
 } from '../constants/Dialog';
 
 const initialState = {
-  open: false
+  open: false,
+  type: null
 };
 
 const Dialog = (state = initialState, action) =>{
@@ -12,13 +13,15 @@ const Dialog = (state = initialState, action) =>{
   case DIALOG_OPEN:{
     return {
       ...state,
-      open: true
+      open: true,
+      type: action.content
     };
   };
   case DIALOG_CLOSE:{
     return {
       ...state,
-      open: false
+      open: false,
+      type: null
     };
   };
   default:
