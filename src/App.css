@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -20,6 +20,29 @@
 
 .App-intro {
   font-size: large;
+}
+
+.selector-dialog {
+  width: 100%;
+  max-width: 500px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+}
+
+.imgPrev img{
+  width: 100%;
+  left: 50%;
+  top: 50%;
+}
+
+.thumbnail img{
+  width: 100%;
+  left: 50%;
+  top: 50%;
 }
 
 @keyframes App-logo-spin {

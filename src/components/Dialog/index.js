@@ -22,7 +22,7 @@ class Dialog extends React.Component{
   };
   render(){
     return(
-      <div className="show-dialog" onClick={this.showState}>
+      <div className="selector-dialog" onClick={this.showState}>
         {this.showDialog()}
       </div>);
   }
