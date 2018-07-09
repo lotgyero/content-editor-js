@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Photo from './Photo';
 import Video from './Video';
@@ -28,16 +27,5 @@ class Dialog extends React.Component{
       </div>);
   }
 }
-
-const mapStateToProps = (state) => {
-  return{
-    open: state.Dialog.open
-  };
-};
-
-
-Dialog.propTypes = {
-
-};
 
 export default Dialog;

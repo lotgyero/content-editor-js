@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Dialog from '../components/Dialog';
@@ -21,7 +19,8 @@ const mapDispatchToProps = ( dispatch )=>{
 };
 
 const ConnectDialog = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Dialog);
 
 export default ConnectDialog;

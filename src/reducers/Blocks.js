@@ -12,7 +12,8 @@ const initialState = {
 
 const Blocks = (state = initialState, action) =>{
   switch(action.type){
-  case BLOCK_CREATE:{
+
+  case BLOCK_CREATE:
     return{
       ...state,
       blocks: [
@@ -20,30 +21,31 @@ const Blocks = (state = initialState, action) =>{
         action.block
       ]
     };
-  }
-  case BLOCK_SELECTED:{
+
+  case BLOCK_SELECTED:
     return {...state, selected: action.block};
-  }
-  case BLOCK_MOVE:{
+
+  case BLOCK_MOVE:
     return{
       ...state,
       blocks: state.blocks.map(
         block =>
           block.id === action.id ?
-          {... block, x: action.x, y: action.y}
+          {...block, x: action.x, y: action.y}
         : block)
     };
-  };
-  case BLOCK_RESIZE:{
+
+
+  case BLOCK_RESIZE:
     return{
       ...state,
       blocks: state.blocks.map(
         block =>
           block.id === action.id ?
-          {... block, x2: action.x2, y2: action.y2}
+          {...block, x2: action.x2, y2: action.y2}
         : block)
     };
-  };
+
   default:
     return state;
   }

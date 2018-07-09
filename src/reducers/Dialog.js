@@ -10,23 +10,21 @@ const initialState = {
 
 const Dialog = (state = initialState, action) =>{
   switch(action.type){
-  case DIALOG_OPEN:{
+  case DIALOG_OPEN:
     return {
       ...state,
       open: true,
       type: action.content
     };
-  };
-  case DIALOG_CLOSE:{
+  case DIALOG_CLOSE:
     return {
       ...state,
       open: false,
       type: null
-    };
   };
   default:
     return state;
-  };
+  }
 };
 
 export default Dialog;

@@ -32,7 +32,7 @@ class Photo extends React.Component{
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} alt="upload photo" />);
+      $imagePreview = (<img src={imagePreviewUrl} alt="upload" />);
     } else {
       $imagePreview = (<div className="imegeRequest">Пожалуйста выберете Картинку</div>);
     };

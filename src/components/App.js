@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 
-import Block from './Block';
 
 // import PhotoButton from './Button/Photo';
 // import VideoButton from './Button/Video';
