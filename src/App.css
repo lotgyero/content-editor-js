@@ -33,6 +33,10 @@
   border: 1px solid black;
 }
 
+div.selector-dialog-hide{
+  display: none;
+}
+
 .imgPrev img{
   width: 100%;
   left: 50%;
