@@ -22,7 +22,7 @@ class Thumbnail extends React.Component {
 
 Thumbnail.propTypes = {
   type: PropTypes.oneOf(["Photo", "Video"]).isRequired,
-  data: PropTypes.string.isRequired
+  data: PropTypes.object.isRequired
 };
 
 export default Thumbnail;

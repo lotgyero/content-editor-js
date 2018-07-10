@@ -13,7 +13,9 @@ class ContentBlock extends React.Component {
 
 ContentBlock.propTypes = {
   type: PropTypes.oneOf(["Photo", "Video"]).isRequired,
-  data: PropTypes.string.isRequired
+  data: PropTypes.shape({
+    dataUri: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default ContentBlock;

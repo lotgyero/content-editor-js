@@ -20,7 +20,7 @@ class Video extends React.Component{
     e.preventDefault();
     this.props.blockCreate('Video', {
       uri: this.state.uri,
-      dataIri: this._getThumbnailURI(this.state.uri)
+      dataUri: this._getThumbnailURI(this.state.uri)
     });
     this.props.hideDialog();
   }
@@ -41,7 +41,7 @@ class Video extends React.Component{
       <div>
         <input type='text'onChange={this._inputChange} value={this.state.uri}/>
         <input type="submit" value="Создать" onClick={this._inputCreate}/>
-        <Thumbnail type="Video" data={this.state.uri}/>
+        <Thumbnail type="Video" data={{dataUri: this.state.uri}}/>
         </div>
     );
   }

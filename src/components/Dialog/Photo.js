@@ -36,7 +36,7 @@ class Photo extends React.Component{
     }
   }
   _showThumbnail=()=>{
-    return(<Thumbnail type="Photo" data={this.state.imagePreviewUrl} />);
+    return(<Thumbnail type="Photo" data={ {dataUri: this.state.imagePreviewUrl}} />);
   };
   render(){
     return(

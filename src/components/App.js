@@ -4,6 +4,7 @@ import '../App.css';
 
 import Dialog from '../containers/Dialog';
 import Panel from '../containers/Panel';
+import EditingSpace from '../containers/EditingSpace';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
       <div className="App">
         <Dialog />
         <Panel />
+        <EditingSpace />
       </div>
     );
   }
