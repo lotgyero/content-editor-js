@@ -54,12 +54,16 @@ const Blocks = (state = initialState, action) =>{
     return{
       ...state,
       blocks: state.blocks.map(
-        block =>
-          block.id === action.id ?
-          {...block, x2: action.x2, y2: action.y2}
-        : block)
+        (block, id) =>{
+          return id === action.block.id ?
+          {...block, geometry:{
+            ...block.geometry,
+            sizeX: action.block.sizeX,
+            sizeY: action.block.sizeY
+          }}
+          : block;
+        })
     };
-
   default:
     return state;
   }

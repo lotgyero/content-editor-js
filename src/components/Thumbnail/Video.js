@@ -16,8 +16,20 @@ class VideoThumbnail extends React.Component{
   };
 
   render(){
+
+    console.log('VideoThumbnail', this.props);
+    const {
+      sizeX,
+      sizeY
+    } = this.props.geometry;
+
+    const style={
+      height: `${sizeX}px`,
+      width: `${sizeY}px`
+    };
+
     const uri = this._getThumbnailURI(this.props.data.dataUri);
-    return(<img src={uri} draggable="false" alt="thumbnail"/>);
+    return(<img src={uri} style={style} draggable="false" alt="thumbnail"/>);
   }
 };
 

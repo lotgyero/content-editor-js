@@ -1,7 +1,8 @@
 import {
   BLOCK_CREATE,
   BLOCK_SELECT,
-  BLOCK_MOVE
+  BLOCK_MOVE,
+  BLOCK_RESIZE
 } from '../constants/Blocks';
 
 
@@ -26,5 +27,12 @@ export const blockMove = (id, x, y)=>{
   return {
     type: BLOCK_MOVE,
     block:{id, x, y }
+  };
+};
+
+export const blockResize = (id, sizeX, sizeY)=>{
+  return {
+    type: BLOCK_RESIZE,
+    block:{ id, sizeX, sizeY }
   };
 };
