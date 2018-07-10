@@ -6,7 +6,7 @@ class VideoThumbnail extends React.Component{
   //     data:"https://youtu.be/9bZkp7q19f0"
   // };
 
-  getThumbnailURI=(uri)=>{
+  _getThumbnailURI=(uri)=>{
     const YouTubeGetID=(url)=>{
       url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
       return (url[2] !== undefined) ? url[2].split(/[^0-9a-z_-]/i)[0] : url[0];
@@ -16,7 +16,7 @@ class VideoThumbnail extends React.Component{
   };
 
   render(){
-    const uri = this.getThumbnailURI(this.props.data.dataUri);
+    const uri = this._getThumbnailURI(this.props.data.dataUri);
     return(<img src={uri} alt="thumbnail"/>);
   }
 };

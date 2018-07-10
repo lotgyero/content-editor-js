@@ -1,16 +1,16 @@
 import React from 'react';
 import Block from './Block';
 class EditingSpace extends React.Component{
-  _createBlock=(block)=>{
+  _createBlock=(block, id)=>{
     console.log('Create block', block);
-    return(<Block type={block.type} data={block.data}/>);
+    return(<Block key={id} type={block.type} data={block.data}/>);
   };
   render(){
     console.log('componets bloks', this.props);
     return(
       <div>
-      {this.props.blocks.map(block =>{
-        return this._createBlock(block);
+        {this.props.blocks.map((block,  id)=>{
+          return this._createBlock(block, id);
       })
       }
       </div>

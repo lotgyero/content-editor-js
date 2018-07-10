@@ -15,6 +15,7 @@ class Thumbnail extends React.Component {
       break;
     }
   };
+
   render(){
     return(<div className="thumbnail">{this._getThumbnail()}</div>);
   }
@@ -22,7 +23,14 @@ class Thumbnail extends React.Component {
 
 Thumbnail.propTypes = {
   type: PropTypes.oneOf(["Photo", "Video"]).isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.shape({
+    dataUri: PropTypes.string.isRequired,
+    geometry: PropTypes.shape({
+      sizeX: PropTypes.number.isRequired,
+      sizeY: PropTypes.number.isRequired
+    }).isRequired
+  })
 };
+
 
 export default Thumbnail;
