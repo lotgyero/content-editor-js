@@ -10,20 +10,39 @@ const initialState = {
   blocks: []
 };
 
+const getY = (blocks) =>{
+  if(blocks.length > 0){
+    return blocks[blocks.length -1].geometry.y + blocks[blocks.length -1].geometry.sizeY;
+  } else {
+    return 0;
+  }
+};
+
+const getX =(blocks) =>{
+  if(blocks.length > 0){
+    return blocks[blocks.length -1].geometry.x;
+  } else {
+    return 0;
+  }
+};
+
 const Blocks = (state = initialState, action) =>{
   switch(action.type){
 
   case BLOCK_CREATE:
-    const block={
-      type: action.blockType,
-      data: action.block,
-      geometry: action.geometry
-    };
     return{
       ...state,
       blocks: [
         ...state.blocks,
-        block
+        {type: action.blockType,
+         data: action.block,
+         geometry: {
+           x: getX(state.blocks),
+           y: getY(state.blocks),
+           sizeX: 200,
+           sizeY: 200
+         }
+        }
       ]
     };
 
@@ -46,9 +65,6 @@ const Blocks = (state = initialState, action) =>{
           }
       )
     };
-
-
-
 
   case BLOCK_RESIZE:
     return{

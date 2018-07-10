@@ -54,8 +54,8 @@ class Video extends React.Component{
           dataUri: this.state.uri
         }}
       geometry={{
-        sizeX: 100,
-        sizeY: 100,
+        sizeX: 200,
+        sizeY: 200,
         x:0,
         y:0
       }}

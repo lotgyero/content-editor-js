@@ -4,7 +4,8 @@ import { EditingSpace } from '../components/EditingSpace';
 
 import {
   blockSelect,
-  blockMove
+  blockMove,
+  blockResize
 } from '../actions/Block';
 // import {} from '../actions/EditingSpace';
 
@@ -21,6 +22,9 @@ const mapDispatchToProps = ( dispatch ) =>{
     },
     blockMove: (id, x, y)=>{
       dispatch(blockMove(id, x, y));
+    },
+    blockResize: (id, sizeX, sizeY) =>{
+      dispatch(blockResize(id, sizeX, sizeY));
     }
   };
 };

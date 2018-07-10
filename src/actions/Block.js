@@ -6,12 +6,11 @@ import {
 } from '../constants/Blocks';
 
 
-export const blockCreate = ( type, block , geometry ) =>{
+export const blockCreate = ( type, block  ) =>{
   return {
     type: BLOCK_CREATE,
     blockType: type,
-    block: block,
-    geometry: geometry
+    block: block
   };
 };
 

@@ -48,8 +48,8 @@ class Photo extends React.Component{
         type="Photo"
         data={{ dataUri: this.state.imagePreviewUrl}}
         geometry={{
-          sizeX: 100,
-          sizeY: 100,
+          sizeX: 200,
+          sizeY: 200,
           x:0,
           y:0
         }} />);

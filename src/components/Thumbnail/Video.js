@@ -24,8 +24,8 @@ class VideoThumbnail extends React.Component{
     } = this.props.geometry;
 
     const style={
-      height: `${sizeX}px`,
-      width: `${sizeY}px`
+      height: `${sizeY-20}px`,
+      width: `${sizeX-20}px`
     };
 
     const uri = this._getThumbnailURI(this.props.data.dataUri);

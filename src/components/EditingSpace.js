@@ -11,7 +11,8 @@ class EditingSpace extends React.Component{
         data={block.data}
         geometry={block.geometry}
         blockSelect={this.props.blockSelect}
-        blockMove={this.props.blockMove}
+      blockMove={this.props.blockMove}
+      blockResize={this.props.blockResize}
       />);
   };
   render(){
