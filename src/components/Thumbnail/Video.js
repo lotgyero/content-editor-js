@@ -17,12 +17,16 @@ class VideoThumbnail extends React.Component{
 
   render(){
     const uri = this._getThumbnailURI(this.props.data.dataUri);
-    return(<img src={uri} alt="thumbnail"/>);
+    return(<img src={uri} draggable="false" alt="thumbnail"/>);
   }
 };
 
 VideoThumbnail.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  geometry: PropTypes.shape({
+    sizeX: PropTypes.number.isRequired,
+    sizeY: PropTypes.number.isRequired
+  }).isRequired
 };
 
 

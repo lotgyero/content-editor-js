@@ -15,12 +15,13 @@ class Photo extends React.Component{
         'Photo',{
           file: this.state.file,
           dataUri: this.state.imagePreviewUrl,
-          geometry:{
-            sizeX: 100,
-            sizeY: 100,
-            x:0,
-            y:0
-          }
+
+        },
+        {
+          sizeX: 200,
+          sizeY: 200,
+          x:0,
+          y:0
         });
       console.log('handle upload', this.state.file);
       this.props.hideDialog();
@@ -42,14 +43,16 @@ class Photo extends React.Component{
     }
   }
   _showThumbnail=()=>{
-    return(<Thumbnail type="Photo" data={{
-      dataUri: this.state.imagePreviewUrl,
-      geometry:{
-        sizeX: 100,
-        sizeY: 100,
-        x:0,
-        y:0
-      }}} />);
+    return(
+      <Thumbnail
+        type="Photo"
+        data={{ dataUri: this.state.imagePreviewUrl}}
+        geometry={{
+          sizeX: 100,
+          sizeY: 100,
+          x:0,
+          y:0
+        }} />);
   };
   render(){
     return(

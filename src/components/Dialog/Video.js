@@ -18,16 +18,19 @@ class Video extends React.Component{
 
   _inputCreate=(e)=>{
     e.preventDefault();
-    this.props.blockCreate('Video', {
-      uri: this.state.uri,
-      dataUri: this._getThumbnailURI(this.state.uri),
-      geometry:{
-        sizeX: 100,
-        sizeY: 100,
+    this.props.blockCreate(
+      'Video',
+      {
+        uri: this.state.uri,
+        dataUri: this._getThumbnailURI(this.state.uri)
+      },
+      {
+        sizeX: 200,
+        sizeY: 200,
         x:0,
         y:0
       }
-    });
+    );
     this.props.hideDialog();
   }
   _inputChange=(e)=>{
@@ -48,14 +51,15 @@ class Video extends React.Component{
         <input type='text'onChange={this._inputChange} value={this.state.uri}/>
         <input type="submit" value="Создать" onClick={this._inputCreate}/>
         <Thumbnail type="Video" data={{
-          dataUri: this.state.uri,
-          geometry:{
-            sizeX: 100,
-            sizeY: 100,
-            x:0,
-            y:0
-          }
-        }}/>
+          dataUri: this.state.uri
+        }}
+      geometry={{
+        sizeX: 100,
+        sizeY: 100,
+        x:0,
+        y:0
+      }}
+        />
         </div>
     );
   }

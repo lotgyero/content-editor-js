@@ -1,6 +1,6 @@
 import {
   BLOCK_CREATE,
-  BLOCK_SELECTED,
+  BLOCK_SELECT,
   BLOCK_MOVE,
   BLOCK_RESIZE
 } from '../constants/Blocks';
@@ -16,7 +16,8 @@ const Blocks = (state = initialState, action) =>{
   case BLOCK_CREATE:
     const block={
       type: action.blockType,
-      data: action.block
+      data: action.block,
+      geometry: action.geometry
     };
     return{
       ...state,
@@ -26,18 +27,27 @@ const Blocks = (state = initialState, action) =>{
       ]
     };
 
-  case BLOCK_SELECTED:
+  case BLOCK_SELECT:
     return {...state, selected: action.block};
 
   case BLOCK_MOVE:
     return{
       ...state,
       blocks: state.blocks.map(
-        block =>
-          block.id === action.id ?
-          {...block, x: action.x, y: action.y}
-        : block)
+        (block, id) =>
+          {
+            return id === action.block.id ?
+              {...block, geometry:{
+                ...block.geometry,
+                x: action.block.x,
+                y: action.block.y,
+              }}
+            : block;
+          }
+      )
     };
+
+
 
 
   case BLOCK_RESIZE:
