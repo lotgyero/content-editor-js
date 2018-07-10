@@ -19,7 +19,7 @@ class Dialog extends React.Component{
     }
   };
   render(){
-    console.log('props dialog',this.props);
+
     return(
       <form className={this.props.open ? "selector-dialog":"selector-dialog-hide"}>
         {this._showDialog()}

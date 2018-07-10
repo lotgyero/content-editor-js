@@ -10,9 +10,7 @@ class ContentBlock extends React.Component {
     clientY: 0
   }
   _handleOnDragEnd=(e)=>{
-    /* console.log(this.props); */
     const {clientX, clientY } = e;
-    /* console.log({clientX, clientY }); */
     const newClientX =  clientX - this.state.clientX;
     const newClientY =  clientY - this.state.clientY;
     this.props.blockMove(this.props.id, newClientX, newClientY);
@@ -20,7 +18,6 @@ class ContentBlock extends React.Component {
 
   _handleOnDragStart=(e)=>{
     const {clientX, clientY } = e;
-    /* console.log('onDragStart', clientX, clientY ); */
     this.setState({
       clientX:  clientX - this.props.geometry.x,
       clientY:  clientY - this.props.geometry.y
@@ -30,7 +27,6 @@ class ContentBlock extends React.Component {
   _selectBlock=()=>{
     this.props.blockSelect(this.props.type, this.props.id);
   }
-
 
   render(){
     const {
@@ -46,7 +42,6 @@ class ContentBlock extends React.Component {
       left: x,
       top: y
     };
-             // onClick={this._selectBlock}
     return(
       <div style={style} className="content-block">
         <PointControl type={this.props.type} geometry={this.props.geometry} blockResize={this.props.blockResize} id={this.props.id} />

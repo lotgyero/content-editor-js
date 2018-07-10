@@ -35,7 +35,7 @@ class Video extends React.Component{
   }
   _inputChange=(e)=>{
     e.preventDefault();
-    console.log(e.target.value);
+
     const value = e.target.value;
     this.setState(prev =>{
       return {
@@ -45,7 +45,7 @@ class Video extends React.Component{
     });
   };
   render(){
-    console.log('video dialog',this.props);
+
     return(
       <div>
         <input type='text'onChange={this._inputChange} value={this.state.uri}/>

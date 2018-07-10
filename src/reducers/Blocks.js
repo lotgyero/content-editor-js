@@ -30,7 +30,7 @@ const xCoordianate = (blocks, id, pointType, size) => {
   const localGeometry = blocks[id].geometry;
   switch(pointType){
   case "NW":
-    return localGeometry.sizeX - size + localGeometry.x;
+    return localGeometry.x + localGeometry.sizeX - size  ;
   case "NE":
     return localGeometry.x;
   case "SW":

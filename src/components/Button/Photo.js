@@ -9,7 +9,6 @@ class PhotoButton extends React.Component{
 
   _handleSubmit(e){
     e.preventDefault();
-    console.log('handle upload', this.state.file);
   }
 
   _handleImageChange(e){
@@ -60,9 +59,5 @@ class PhotoButton extends React.Component{
       </div>);
   }
 }
-
-// PhotoButton.propTypes = {
-
-// };
 
 export default PhotoButton;

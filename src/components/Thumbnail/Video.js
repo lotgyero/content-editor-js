@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class VideoThumbnail extends React.Component{
-  // static  defaultProps = {
-  //     data:"https://youtu.be/9bZkp7q19f0"
-  // };
 
   _getThumbnailURI=(uri)=>{
     const YouTubeGetID=(url)=>{
@@ -17,7 +14,6 @@ class VideoThumbnail extends React.Component{
 
   render(){
 
-    console.log('VideoThumbnail', this.props);
     const {
       sizeX,
       sizeY

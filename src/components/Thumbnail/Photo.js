@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class PhotoThumbnail extends React.Component{
 
   render(){
-    console.log('PhotoThumbnail', this.props);
+
     const {
       sizeX,
       sizeY

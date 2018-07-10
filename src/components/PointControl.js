@@ -49,22 +49,18 @@ class Point extends React.Component{
       return styleCenter;
     }
   }
-  _handleClick=()=>{
-    console.log('point', this.props);
-  }
+
   _handleOnDragStart=(e)=>{
     const {clientX, clientY } = e;
-    console.log('onDragStart', clientX, clientY );
   }
   _handleOnDragEnd=(e)=>{
     const {clientX, clientY } = e;
-    console.log('onDragStop', clientX, clientY);
     let sizeX;
     let sizeY;
     switch(this.props.orientation){
     case"NW":
       sizeX =  this.props.geometry.sizeX - clientX + this.props.geometry.x;
-      sizeY = this.props.geometry.sizeX - clientY + this.props.geometry.y ;
+      sizeY = this.props.geometry.sizeY - clientY + this.props.geometry.y ;
       this.props.blockResize( this.props.id, sizeX, sizeY, "NW");
       break;
     case"NE":
@@ -87,13 +83,11 @@ class Point extends React.Component{
     }
   }
   render(){
-    console.log('control points',this.props);
     return(
         <div
       style={this._getStyle()}
       draggable="true"
       className="control-point"
-      onClick={this._handleClick}
       onDragStart={this._handleOnDragStart}
       onDragEnd={this._handleOnDragEnd}
         >
@@ -102,23 +96,8 @@ class Point extends React.Component{
   }
 }
 
-
-// _controls=()=>{
-  //   switch(this.props.type){
-  //   case "Photo":
-  //     return(<PointControl />);
-  //   case "Video":
-  //     return(<PointControl />);
-  //   default:
-  //     return(<div />);
-  //   };
-  // }
-
 class PointControl extends React.Component{
-
-
   render(){
-    console.log('point control', this.props);
     return(
         <div>
 

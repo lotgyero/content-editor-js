@@ -23,7 +23,7 @@ class Photo extends React.Component{
           x:0,
           y:0
         });
-      console.log('handle upload', this.state.file);
+
       this.props.hideDialog();
     }}
 
@@ -75,9 +75,5 @@ class Photo extends React.Component{
       </div>);
   }
 }
-
-// Photo.propTypes = {
-
-// };
 
 export default Photo;
