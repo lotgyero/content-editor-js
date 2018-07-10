@@ -65,26 +65,22 @@ class Point extends React.Component{
     case"NW":
       sizeX =  this.props.geometry.sizeX - clientX + this.props.geometry.x;
       sizeY = this.props.geometry.sizeX - clientY + this.props.geometry.y ;
-      console.log('rsize NW', sizeX, sizeY );
-      this.props.blockResize( this.props.id, sizeX, sizeY);
+      this.props.blockResize( this.props.id, sizeX, sizeY, "NW");
       break;
     case"NE":
       sizeX = clientX - this.props.geometry.x;
       sizeY = this.props.geometry.y - clientY + this.props.geometry.sizeY ;
-      console.log('rsize NE', sizeX, sizeY );
-      this.props.blockResize( this.props.id, sizeX, sizeY);
+      this.props.blockResize( this.props.id, sizeX, sizeY, "NE");
       break;
     case"SW":
       sizeX = this.props.geometry.x - clientX + this.props.geometry.sizeX ;
       sizeY = clientY - this.props.geometry.y;
-      console.log('rsize SW', sizeX, sizeY );
-      this.props.blockResize( this.props.id, sizeX, sizeY);
+      this.props.blockResize( this.props.id, sizeX, sizeY, "SW");
       break;
     case"SE":
       sizeX = clientX - this.props.geometry.x;
       sizeY = clientY - this.props.geometry.y;
-      console.log('rsize SE', sizeX, sizeY );
-      this.props.blockResize( this.props.id, sizeX, sizeY);
+      this.props.blockResize( this.props.id, sizeX, sizeY, "SE");
       break;
     default:
       break;

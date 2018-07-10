@@ -26,6 +26,38 @@ const getX =(blocks) =>{
   }
 };
 
+const xCoordianate = (blocks, id, pointType, size) => {
+  const localGeometry = blocks[id].geometry;
+  switch(pointType){
+  case "NW":
+    return localGeometry.sizeX - size + localGeometry.x;
+  case "NE":
+    return localGeometry.x;
+  case "SW":
+    return localGeometry.sizeX - size + localGeometry.x;
+  case "SE":
+    return localGeometry.x;
+  default:
+    return localGeometry.x;
+  }
+};
+
+const yCoordianate = (blocks, id, pointType, size) => {
+  const localGeometry = blocks[id].geometry;
+  switch(pointType){
+  case "NW":
+    return localGeometry.sizeY - size + localGeometry.y;
+  case "NE":
+    return localGeometry.sizeY - size + localGeometry.y;
+  case "SW":
+    return localGeometry.y;
+  case "SE":
+    return localGeometry.y;
+  default:
+    return localGeometry.y;
+  }
+};
+
 const Blocks = (state = initialState, action) =>{
   switch(action.type){
 
@@ -66,7 +98,9 @@ const Blocks = (state = initialState, action) =>{
       )
     };
 
+
   case BLOCK_RESIZE:
+
     return{
       ...state,
       blocks: state.blocks.map(
@@ -74,6 +108,18 @@ const Blocks = (state = initialState, action) =>{
           return id === action.block.id ?
           {...block, geometry:{
             ...block.geometry,
+            x: xCoordianate(
+              state.blocks,
+              action.block.id,
+              action.block.pointType,
+              action.block.sizeX
+            ),
+            y: yCoordianate(
+              state.blocks,
+              action.block.id,
+              action.block.pointType,
+              action.block.sizeY
+            ),
             sizeX: action.block.sizeX,
             sizeY: action.block.sizeY
           }}

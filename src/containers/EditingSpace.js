@@ -23,8 +23,8 @@ const mapDispatchToProps = ( dispatch ) =>{
     blockMove: (id, x, y)=>{
       dispatch(blockMove(id, x, y));
     },
-    blockResize: (id, sizeX, sizeY) =>{
-      dispatch(blockResize(id, sizeX, sizeY));
+    blockResize: (id, sizeX, sizeY, pointType) =>{
+      dispatch(blockResize(id, sizeX, sizeY, pointType));
     }
   };
 };
