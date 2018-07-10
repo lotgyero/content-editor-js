@@ -51,7 +51,7 @@ class Point extends React.Component{
   }
 
   _handleOnDragStart=(e)=>{
-    const {clientX, clientY } = e;
+    // const {clientX, clientY } = e;
   }
   _handleOnDragEnd=(e)=>{
     const {clientX, clientY } = e;
