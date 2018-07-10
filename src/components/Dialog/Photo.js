@@ -16,7 +16,6 @@ class Photo extends React.Component{
           file: this.state.file,
           dataUri: this.state.imagePreviewUrl
         });
-
       console.log('handle upload', this.state.file);
       this.props.hideDialog();
     }}
@@ -42,7 +41,6 @@ class Photo extends React.Component{
   render(){
     return(
       <div className="imageSelector">
-        {this.state.imagePreviewUrl ? this._showThumbnail() : ''}
           <input
             ref="upload"
             className="fileInput"
@@ -57,7 +55,7 @@ class Photo extends React.Component{
           >
             Загрузить фото
           </button>
-
+        {this.state.imagePreviewUrl ? this._showThumbnail() : ''}
       </div>);
   }
 }

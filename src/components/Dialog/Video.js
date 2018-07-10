@@ -6,10 +6,22 @@ class Video extends React.Component{
   state={
     uri:"https://youtu.be/9bZkp7q19f0"
   };
+
+  _getThumbnailURI=(uri)=>{
+    const YouTubeGetID=(url)=>{
+      url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+      return (url[2] !== undefined) ? url[2].split(/[^0-9a-z_-]/i)[0] : url[0];
+    };
+    const youId = YouTubeGetID(uri);
+    return `http://img.youtube.com/vi/${youId}/0.jpg`;
+  };
+
   _inputCreate=(e)=>{
     e.preventDefault();
     this.props.blockCreate('Video', {
-      uri: this.state.uri});
+      uri: this.state.uri,
+      dataIri: this._getThumbnailURI(this.state.uri)
+    });
     this.props.hideDialog();
   }
   _inputChange=(e)=>{
