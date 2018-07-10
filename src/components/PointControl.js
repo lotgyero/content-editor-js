@@ -57,29 +57,45 @@ class Point extends React.Component{
     const {clientX, clientY } = e;
     let sizeX;
     let sizeY;
+    let proportional = false;
+
+    switch(this.props.type){
+    case "Photo":
+      proportional = true;
+      break;
+    case "Video":
+      proportional = false;
+      break;
+    default:
+      proportional = false;
+    };
+
     switch(this.props.orientation){
     case"NW":
       sizeX =  this.props.geometry.sizeX - clientX + this.props.geometry.x;
       sizeY = this.props.geometry.sizeY - clientY + this.props.geometry.y ;
-      this.props.blockResize( this.props.id, sizeX, sizeY, "NW");
       break;
     case"NE":
       sizeX = clientX - this.props.geometry.x;
       sizeY = this.props.geometry.y - clientY + this.props.geometry.sizeY ;
-      this.props.blockResize( this.props.id, sizeX, sizeY, "NE");
       break;
     case"SW":
       sizeX = this.props.geometry.x - clientX + this.props.geometry.sizeX ;
       sizeY = clientY - this.props.geometry.y;
-      this.props.blockResize( this.props.id, sizeX, sizeY, "SW");
       break;
     case"SE":
       sizeX = clientX - this.props.geometry.x;
       sizeY = clientY - this.props.geometry.y;
-      this.props.blockResize( this.props.id, sizeX, sizeY, "SE");
       break;
     default:
       break;
+    }
+
+    if(proportional){
+      let newSize = sizeX < sizeY ? sizeX: sizeY;
+      this.props.blockResize( this.props.id, newSize, newSize, this.props.orientation);
+    } else {
+      this.props.blockResize( this.props.id, sizeX, sizeY, this.props.orientation);
     }
   }
   render(){
