@@ -1,16 +1,25 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+
+import Thumbnail from '../Thumbnail';
 
 class Photo extends React.Component{
   state ={
-    file: '',
+    file: false,
     imagePreviewUrl: ''
   }
 
   _handleSubmit(e){
     e.preventDefault();
-    console.log('handle upload', this.state.file);
-  }
+    if(this.state.file){
+    this.props.blockCreate(
+      'Photo',{
+          file: this.state.file,
+          dataUri: this.state.imagePreviewUrl
+        });
+
+      console.log('handle upload', this.state.file);
+      this.props.hideDialog();
+    }}
 
   _handleImageChange(e){
     e.preventDefault();
@@ -27,18 +36,13 @@ class Photo extends React.Component{
       reader.readAsDataURL(file);
     }
   }
-
+  _showThumbnail=()=>{
+    return(<Thumbnail type="Photo" data={this.state.imagePreviewUrl} />);
+  };
   render(){
-    let {imagePreviewUrl} = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} alt="upload" />);
-    } else {
-      $imagePreview = (<div className="imegeRequest">Пожалуйста выберете Картинку</div>);
-    };
     return(
       <div className="imageSelector">
-        <form onSubmit={(e)=>this._handleSubmit(e)}>
+        {this.state.imagePreviewUrl ? this._showThumbnail() : ''}
           <input
             ref="upload"
             className="fileInput"
@@ -53,10 +57,7 @@ class Photo extends React.Component{
           >
             Загрузить фото
           </button>
-          <div className="imgPrev">
-            {$imagePreview}
-          </div>
-        </form>
+
       </div>);
   }
 }

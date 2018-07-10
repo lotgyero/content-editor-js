@@ -14,11 +14,15 @@ const Blocks = (state = initialState, action) =>{
   switch(action.type){
 
   case BLOCK_CREATE:
+    const block={
+      type: action.blockType,
+      data: action.block
+    };
     return{
       ...state,
       blocks: [
         ...state.blocks,
-        action.block
+        block
       ]
     };
 

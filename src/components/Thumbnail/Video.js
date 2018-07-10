@@ -12,7 +12,7 @@ class VideoThumbnail extends React.Component{
       return (url[2] !== undefined) ? url[2].split(/[^0-9a-z_-]/i)[0] : url[0];
     };
     const youId = YouTubeGetID(uri);
-    return `http://img.youtube.com/vi/${youId}/maxresdefault.jpg`;
+    return `http://img.youtube.com/vi/${youId}/0.jpg`;
   };
 
   render(){

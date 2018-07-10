@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 
 import Dialog from '../components/Dialog';
 import { hideDialog } from '../actions/Dialog';
+import { blockCreate } from '../actions/Block';
+
 
 const mapStateToProps = (state) => {
   return{
@@ -13,7 +15,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = ( dispatch )=>{
   return {
     hideDialog: () =>{
-      dispatch(hideDialog);
+      dispatch(hideDialog());
+    },
+    blockCreate: (type, block) =>{
+      dispatch(blockCreate(type, block));
     }
   };
 };

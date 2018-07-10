@@ -4,16 +4,14 @@ import Photo from './Photo';
 import Video from './Video';
 
 class Dialog extends React.Component{
-  showState=()=>{
-    console.log(this.props);
-  };
-  showDialog=()=>{
+
+  _showDialog=(e)=>{
     switch(this.props.type){
       case 'Photo':{
-        return (<Photo />);
+        return (<Photo blockCreate={this.props.blockCreate} hideDialog={this.props.hideDialog} />);
       }
       case 'Video':{
-        return (<Video />);
+        return (<Video blockCreate={this.props.blockCreate} hideDialog={this.props.hideDialog} />);
       }
       default:{
         return(<div />);
@@ -21,10 +19,11 @@ class Dialog extends React.Component{
     }
   };
   render(){
+    console.log('props dialog',this.props);
     return(
-      <div className={this.props.open ? "selector-dialog":"selector-dialog-hide"} onClick={this.showState}>
-        {this.showDialog()}
-      </div>);
+      <form className={this.props.open ? "selector-dialog":"selector-dialog-hide"}>
+        {this._showDialog()}
+      </form>);
   }
 }
 
