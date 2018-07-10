@@ -2,26 +2,6 @@
   /* text-align: center; */
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 30px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 20px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 .selector-dialog {
   width: 100%;
   max-width: 500px;
@@ -47,9 +27,4 @@ div.selector-dialog-hide{
   width: 100%;
   left: 50%;
   top: 50%;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
