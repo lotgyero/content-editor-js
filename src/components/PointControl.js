@@ -6,6 +6,7 @@ W          E
      S
 */
 import React from 'react';
+import {EditingSpaceContext} from './EditingSpace';
 
 const styleNW ={
   left: 0,
@@ -93,9 +94,9 @@ class Point extends React.Component{
 
     if(proportional){
       let newSize = sizeX < sizeY ? sizeX: sizeY;
-      this.props.blockResize( this.props.id, newSize, newSize, this.props.orientation);
+      this.props.actions.blockResize( this.props.id, newSize, newSize, this.props.orientation);
     } else {
-      this.props.blockResize( this.props.id, sizeX, sizeY, this.props.orientation);
+      this.props.actions.blockResize( this.props.id, sizeX, sizeY, this.props.orientation);
     }
   }
   render(){
@@ -112,33 +113,45 @@ class Point extends React.Component{
   }
 }
 
+// actions={this.props.actions}
+
+const PointWrapper = (props) =>{
+  return(
+      <EditingSpaceContext.Consumer>
+      {context => <Point {...props} actions={context.actions}/>}
+      </EditingSpaceContext.Consumer>
+  )
+};
+
+
+
 class PointControl extends React.Component{
   render(){
     return(
         <div>
 
-        <Point
+        <PointWrapper
       orientation="NW"
       id={this.props.id}
       type={this.props.type}
       blockResize={this.props.blockResize}
       geometry={this.props.geometry} />
 
-        <Point
+        <PointWrapper
       orientation="NE"
       id={this.props.id}
       type={this.props.type}
       blockResize={this.props.blockResize}
       geometry={this.props.geometry} />
 
-        <Point
+        <PointWrapper
       orientation="SW"
       id={this.props.id}
       type={this.props.type}
       blockResize={this.props.blockResize}
       geometry={this.props.geometry} />
 
-        <Point
+        <PointWrapper
       orientation="SE"
       id={this.props.id}
       type={this.props.type}

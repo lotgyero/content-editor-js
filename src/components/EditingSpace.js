@@ -1,31 +1,40 @@
 import React from 'react';
 import Block from './Block';
+
+const EditingSpaceContext = React.createContext ();
+
+      //   blockSelect={this.props.blockSelect}
+      // blockMove={this.props.blockMove}
+      // blockResize={this.props.blockResize}
+
 class EditingSpace extends React.Component{
   _createBlock=(block, id)=>{
 
     return(
+        <EditingSpaceContext.Provider key={id} value={{actions: this.props.actions}}>
       <Block
-        key={id}
         id={id}
         type={block.type}
         data={block.data}
         geometry={block.geometry}
-        blockSelect={this.props.blockSelect}
-      blockMove={this.props.blockMove}
-      blockResize={this.props.blockResize}
-      />);
+
+        />
+        </EditingSpaceContext.Provider>
+    );
   };
   render(){
 
     return(
-      <div className="editing-space">
+        <div className="editing-space">
         {this.props.blocks.map((block,  id)=>{
           return this._createBlock(block, id);
       })
-      }
+        }
+
       </div>
     );
   }
 }
 
-export { EditingSpace };
+export default  EditingSpace ;
+export { EditingSpaceContext };

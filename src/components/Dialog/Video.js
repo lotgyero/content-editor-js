@@ -1,6 +1,15 @@
 import React from 'react';
+import { DialogActionContext } from './';
 
 import Thumbnail from '../Thumbnail';
+
+const VideoContextWrapper = (props)=>{
+  return(
+    <DialogActionContext.Consumer>
+      {context => <Video actions={context}/>}
+    </DialogActionContext.Consumer>
+  );
+};
 
 class Video extends React.Component{
   state={
@@ -18,7 +27,7 @@ class Video extends React.Component{
 
   _inputCreate=(e)=>{
     e.preventDefault();
-    this.props.blockCreate(
+    this.props.actions.blockCreate(
       'Video',
       {
         uri: this.state.uri,
@@ -31,7 +40,7 @@ class Video extends React.Component{
         y:0
       }
     );
-    this.props.hideDialog();
+    this.props.actions.hideDialog();
   }
   _inputChange=(e)=>{
     e.preventDefault();
@@ -66,4 +75,4 @@ class Video extends React.Component{
 }
 
 
-export default Video;
+export default VideoContextWrapper;

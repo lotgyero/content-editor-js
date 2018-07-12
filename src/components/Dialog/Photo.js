@@ -1,8 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { DialogActionContext } from './';
 
 import Thumbnail from '../Thumbnail';
 
+const PhotoContextWrapper = (props)=>{
+  return(
+    <DialogActionContext.Consumer>
+      {context => <Photo actions={context}/>}
+    </DialogActionContext.Consumer>
+  );
+};
+
 class Photo extends React.Component{
+
   state ={
     file: false,
     imagePreviewUrl: ''
@@ -11,7 +22,7 @@ class Photo extends React.Component{
   _handleSubmit(e){
     e.preventDefault();
     if(this.state.file){
-      this.props.blockCreate(
+      this.props.actions.blockCreate(
         'Photo',{
           file: this.state.file,
           dataUri: this.state.imagePreviewUrl,
@@ -24,7 +35,7 @@ class Photo extends React.Component{
           y:0
         });
 
-      this.props.hideDialog();
+      this.props.actions.hideDialog();
     }}
 
   _handleImageChange(e){
@@ -55,8 +66,9 @@ class Photo extends React.Component{
         }} />);
   };
   render(){
+    console.log(this.context);
     return(
-      <div className="imageSelector">
+        <div className="imageSelector">
           <input
             ref="upload"
             className="fileInput"
@@ -72,8 +84,10 @@ class Photo extends React.Component{
             Загрузить фото
           </button>
         {this.state.imagePreviewUrl ? this._showThumbnail() : ''}
-      </div>);
+      </div>
+
+    );
   }
 }
 
-export default Photo;
+export default PhotoContextWrapper;

@@ -3,6 +3,16 @@ import PropTypes from 'prop-types';
 
 import Thumbnail from './Thumbnail';
 import PointControl from './PointControl';
+import {EditingSpaceContext} from './EditingSpace';
+
+const ContentBlockWrapper = (props)=>{
+  return(
+    <EditingSpaceContext.Consumer>
+      {context => <ContentBlock {...props} actions={context.actions}/>}
+    </EditingSpaceContext.Consumer>
+  );
+};
+
 
 class ContentBlock extends React.Component {
   state={
@@ -13,7 +23,7 @@ class ContentBlock extends React.Component {
     const {clientX, clientY } = e;
     const newClientX =  clientX - this.state.clientX;
     const newClientY =  clientY - this.state.clientY;
-    this.props.blockMove(this.props.id, newClientX, newClientY);
+    this.props.actions.blockMove(this.props.id, newClientX, newClientY);
   }
 
   _handleOnDragStart=(e)=>{
@@ -25,7 +35,7 @@ class ContentBlock extends React.Component {
   }
 
   _selectBlock=()=>{
-    this.props.blockSelect(this.props.type, this.props.id);
+    this.props.actions.blockSelect(this.props.type, this.props.id);
   }
 
   render(){
@@ -42,9 +52,10 @@ class ContentBlock extends React.Component {
       left: x,
       top: y
     };
+    console.log(this.props.actions);
     return(
       <div style={style} className="content-block">
-        <PointControl type={this.props.type} geometry={this.props.geometry} blockResize={this.props.blockResize} id={this.props.id} />
+        <PointControl type={this.props.type} geometry={this.props.geometry}  id={this.props.id} />
         <div
           draggable="true"
           className="contentBlock"
@@ -71,4 +82,4 @@ ContentBlock.propTypes = {
   }).isRequired
 };
 
-export default ContentBlock;
+export default ContentBlockWrapper;
