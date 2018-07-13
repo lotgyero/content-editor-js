@@ -18,6 +18,40 @@ const isProportional =(type)=>{
       return false;
     }
 };
+
+
+const xCoordianate = ( geometry, pointType, size) => {
+
+  switch(pointType){
+  case "NW":
+    return geometry.x + geometry.sizeX - size  ;
+  case "NE":
+    return geometry.x;
+  case "SW":
+    return geometry.sizeX - size + geometry.x;
+  case "SE":
+    return geometry.x;
+  default:
+    return geometry.x;
+  }
+};
+
+const yCoordianate = (geometry, pointType, size) => {
+
+  switch(pointType){
+  case "NW":
+    return geometry.sizeY - size + geometry.y;
+  case "NE":
+    return geometry.sizeY - size + geometry.y;
+  case "SW":
+    return geometry.y;
+  case "SE":
+    return geometry.y;
+  default:
+    return geometry.y;
+  }
+};
+
 const calcSize = ({clientX, clientY, proportional, geometry, orientation })=>{
 
   let newSizeX;
@@ -110,7 +144,7 @@ class Point extends React.Component{
   }
 
   _handleOnDragStart=()=>{
-    this.props.handleSizeChange.start();
+
   }
 
   _handleOnDrag=(e)=>{
@@ -128,8 +162,11 @@ class Point extends React.Component{
       geometry,
       orientation
     });
-
-    this.props.handleSizeChange.update({
+      const x = xCoordianate ( geometry, this.props.block.type , newSizeX);
+      const y = xCoordianate ( geometry, this.props.block.type , newSizeY);
+      this.props.handleSizeChange.update({
+        x,
+        y,
       newSizeX,
       newSizeY
     });}
@@ -141,12 +178,16 @@ class Point extends React.Component{
       orientation
     });
   }
+  _hadleOnClick=()=>{
+    this.props.handleSizeChange.start();
+  }
   render(){
     return(
         <div
       style={this._getStyle()}
       draggable="true"
       className="control-point"
+      onClick={this._handleOnClick}
       onDragStart={this._handleOnDragStart}
       onDrag={this._handleOnDrag}
       onDragEnd={this._handleOnDragEnd}

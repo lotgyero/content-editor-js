@@ -19,20 +19,36 @@ class ContentBlock extends React.Component {
     clientX: 0,
     clientY: 0,
     sizeChange: false,
-    sizeX: 0,
-    sizeY: 0
+    geometry: {
+      x: 0,
+      y: 0,
+      sizeX: 0,
+      sizeY: 0
+    }
   }
   componentDidMount=()=>{
-        this.setState({
-      sizeX: this.props.block.geometry.sizeX,
-      sizeY: this.props.block.geometry.sizeY,
+    const {
+      x, y, sizeX, sizeY
+    } = this.props.block.geometry;
+    this.setState({
+      geometry: {
+        x,
+        y,
+        sizeX,
+        sizeY
+      },
       sizeChange: false
     });
   };
   handleSizeChangeStart=()=>{
     this.setState({
-      sizeX: this.props.block.geometry.sizeX,
-      sizeY: this.props.block.geometry.sizeY,
+      geometry: {
+        ...this.state.geometry,
+        x: this.props.block.geometry.x,
+        y: this.props.block.geometry.y,
+        sizeX: this.props.block.geometry.sizeX,
+        sizeY: this.props.block.geometry.sizeY
+      },
       sizeChange: true
     });
   }
@@ -42,20 +58,29 @@ class ContentBlock extends React.Component {
     });
     this.props.actions.blockResize(
       id,
-      this.state.sizeX,
-      this.state.sizeY,
+      this.state.geometry.x,
+      this.state.geometry.y,
+      this.state.geometry.sizeX,
+      this.state.geometry.sizeY,
       orientation
     );
   }
   handleSizeUpdate=(data)=>{
     const {
+      x,
+      y,
       newSizeX,
       newSizeY
     } = data;
     this.setState({
-      sizeX: newSizeX,
-      sizeY: newSizeY
-    });
+      sizeChange: true,
+      geometry:{
+        ...this.state.geometry,
+        x,
+        y,
+        sizeX: newSizeX,
+        sizeY: newSizeY
+      }});
   }
   _handleOnDragEnd=(e)=>{
     const {clientX, clientY } = e;
@@ -68,8 +93,8 @@ class ContentBlock extends React.Component {
     const {clientX, clientY } = e;
     const {x, y }= this.props.block.geometry;
     this.setState({
-      clientX:  clientX - x,
-      clientY:  clientY - y
+        clientX:  clientX - x,
+        clientY:  clientY - y
     });
   }
 
@@ -78,16 +103,16 @@ class ContentBlock extends React.Component {
   }
 
   render(){
-    const {
-      x,
-      y
-    } = this.props.block.geometry;
+    // const {
+    //   x,
+    //   y
+    // } = this.props.block.geometry;
     const style={
-      height: this.state.sizeY,
-      width: this.state.sizeX,
+      height: this.state.geometry.sizeY,
+      width: this.state.geometry.sizeX,
       position: "absolute",
-      left: x,
-      top: y
+      left: this.state.sizeChange ? this.state.geometry.x : this.props.block.geometry.x,
+      top: this.state.sizeChange ? this.state.geometry.y  :this.props.block.geometry.y
     };
     const actions ={
         start: this.handleSizeChangeStart,
@@ -98,8 +123,8 @@ class ContentBlock extends React.Component {
       ...this.props.block,
       geometry: {
         ...this.props.block.geometry,
-        sizeX: this.state.sizeX,
-        sizeY: this.state.sizeY,
+        sizeX: this.state.geometry.sizeX,
+        sizeY: this.state.geometry.sizeY,
       }
     };
     return(

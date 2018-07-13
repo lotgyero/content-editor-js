@@ -29,9 +29,9 @@ export const blockMove = (id, x, y)=>{
   };
 };
 
-export const blockResize = (id, sizeX, sizeY, pointType)=>{
+export const blockResize = (id, x, y, sizeX, sizeY, pointType)=>{
   return {
     type: BLOCK_RESIZE,
-    block:{ id, sizeX, sizeY , pointType}
+    block:{ id, x, y, sizeX, sizeY , pointType}
   };
 };
