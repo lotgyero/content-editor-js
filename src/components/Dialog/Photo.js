@@ -66,7 +66,6 @@ class Photo extends React.Component{
         <Thumbnail block={block} />);
   };
   render(){
-    console.log(this.context);
     return(
         <div className="imageSelector">
           <input

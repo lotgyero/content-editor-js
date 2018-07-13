@@ -19,23 +19,43 @@ class ContentBlock extends React.Component {
     clientX: 0,
     clientY: 0,
     sizeChange: false,
-    sizeX: this.props.block.geometry.sizeX,
-    sizeY: this.props.block.geometry.sizeY
+    sizeX: 0,
+    sizeY: 0
   }
+  componentDidMount=()=>{
+        this.setState({
+      sizeX: this.props.block.geometry.sizeX,
+      sizeY: this.props.block.geometry.sizeY,
+      sizeChange: false
+    });
+  };
   handleSizeChangeStart=()=>{
-    console.log('Size change start');
     this.setState({
+      sizeX: this.props.block.geometry.sizeX,
+      sizeY: this.props.block.geometry.sizeY,
       sizeChange: true
     });
   }
-  handleSizeChangeStop=()=>{
-    console.log('Size change stop');
+  handleSizeChangeStop=({id, orientation})=>{
     this.setState({
       sizeChange: false
     });
+    this.props.actions.blockResize(
+      id,
+      this.state.sizeX,
+      this.state.sizeY,
+      orientation
+    );
   }
-  handleSizeUpdate=()=>{
-    console.log('Change size');
+  handleSizeUpdate=(data)=>{
+    const {
+      newSizeX,
+      newSizeY
+    } = data;
+    this.setState({
+      sizeX: newSizeX,
+      sizeY: newSizeY
+    });
   }
   _handleOnDragEnd=(e)=>{
     const {clientX, clientY } = e;
@@ -59,14 +79,12 @@ class ContentBlock extends React.Component {
 
   render(){
     const {
-      sizeX,
-      sizeY,
       x,
       y
     } = this.props.block.geometry;
     const style={
-      height: sizeY,
-      width: sizeX,
+      height: this.state.sizeY,
+      width: this.state.sizeX,
       position: "absolute",
       left: x,
       top: y
@@ -75,6 +93,14 @@ class ContentBlock extends React.Component {
         start: this.handleSizeChangeStart,
         stop:  this.handleSizeChangeStop,
         update:  this.handleSizeUpdate
+    };
+    const block = {
+      ...this.props.block,
+      geometry: {
+        ...this.props.block.geometry,
+        sizeX: this.state.sizeX,
+        sizeY: this.state.sizeY,
+      }
     };
     return(
       <div style={style} className="content-block">
@@ -89,7 +115,7 @@ class ContentBlock extends React.Component {
           onDragStart={this._handleOnDragStart}
           onDragEnd={this._handleOnDragEnd}
         >
-        <Thumbnail block={this.props.block}  />
+        <Thumbnail block={block}  />
         </div>
       </div>
     );

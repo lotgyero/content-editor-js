@@ -12,13 +12,11 @@ const isProportional =(type)=>{
     switch(type){
     case "Photo":
       return true;
-      break;
     case "Video":
       return  false;
-      break;
     default:
       return false;
-    };
+    }
 };
 const calcSize = ({clientX, clientY, proportional, geometry, orientation })=>{
 
@@ -51,7 +49,6 @@ const calcSize = ({clientX, clientY, proportional, geometry, orientation })=>{
   if(proportional){
     let reSizeX =   newSizeX / sizeX;
     let reSizeY =  newSizeY /sizeY ;
-    console.log({reSizeX, reSizeY});
 
     let mashResize ;
     if(reSizeX <1 && reSizeY < 1){
@@ -69,9 +66,6 @@ const calcSize = ({clientX, clientY, proportional, geometry, orientation })=>{
     newSizeY
   };
 };
-
-
-
 
 const style = {
   NW: {
@@ -115,13 +109,13 @@ class Point extends React.Component{
     }
   }
 
-  _handleOnDragStart=(e)=>{
-    const {clientX, clientY } = e;
+  _handleOnDragStart=()=>{
     this.props.handleSizeChange.start();
   }
-  _handleOnDragEnd=(e)=>{
-    const {clientX, clientY } = e;
 
+  _handleOnDrag=(e)=>{
+    const {clientX, clientY } = e;
+    if(clientX >0 && clientX>0){
     const { geometry } = this.props.block;
     const { orientation }  = this.props;
     const {
@@ -135,11 +129,17 @@ class Point extends React.Component{
       orientation
     });
 
-    this.props.actions.blockResize(
-      this.props.id,
+    this.props.handleSizeChange.update({
       newSizeX,
-      newSizeY,
-      orientation);
+      newSizeY
+    });}
+  }
+  _handleOnDragEnd=()=>{
+    const { orientation }  = this.props;
+   this.props.handleSizeChange.stop({
+      id: this.props.id,
+      orientation
+    });
   }
   render(){
     return(
@@ -148,14 +148,13 @@ class Point extends React.Component{
       draggable="true"
       className="control-point"
       onDragStart={this._handleOnDragStart}
+      onDrag={this._handleOnDrag}
       onDragEnd={this._handleOnDragEnd}
         >
         </div>
     );
   }
 }
-
-// actions={this.props.actions}
 
 const PointWrapper = (props) =>{
   return(
@@ -164,8 +163,6 @@ const PointWrapper = (props) =>{
       </EditingSpaceContext.Consumer>
   )
 };
-
-
 
 class PointControl extends React.Component{
   render(){
