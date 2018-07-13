@@ -26,37 +26,6 @@ const getX =(blocks) =>{
   }
 };
 
-const xCoordianate = (blocks, id, pointType, size) => {
-  const localGeometry = blocks[id].geometry;
-  switch(pointType){
-  case "NW":
-    return localGeometry.x + localGeometry.sizeX - size  ;
-  case "NE":
-    return localGeometry.x;
-  case "SW":
-    return localGeometry.sizeX - size + localGeometry.x;
-  case "SE":
-    return localGeometry.x;
-  default:
-    return localGeometry.x;
-  }
-};
-
-const yCoordianate = (blocks, id, pointType, size) => {
-  const localGeometry = blocks[id].geometry;
-  switch(pointType){
-  case "NW":
-    return localGeometry.sizeY - size + localGeometry.y;
-  case "NE":
-    return localGeometry.sizeY - size + localGeometry.y;
-  case "SW":
-    return localGeometry.y;
-  case "SE":
-    return localGeometry.y;
-  default:
-    return localGeometry.y;
-  }
-};
 
 const Blocks = (state = initialState, action) =>{
   switch(action.type){

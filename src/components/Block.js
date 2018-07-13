@@ -123,6 +123,8 @@ class ContentBlock extends React.Component {
       ...this.props.block,
       geometry: {
         ...this.props.block.geometry,
+        x: this.state.geometry.x,
+        y: this.state.geometry.y,
         sizeX: this.state.geometry.sizeX,
         sizeY: this.state.geometry.sizeY,
       }

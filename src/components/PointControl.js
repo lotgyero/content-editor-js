@@ -20,7 +20,6 @@ const isProportional =(type)=>{
 };
 
 const xCoordianate = ( geometry, pointType, size) => {
-  console.log('xCoordianate',{geometry, pointType, size});
   const {x, sizeX} = geometry;
   switch(pointType){
   case "NW":
@@ -37,7 +36,6 @@ const xCoordianate = ( geometry, pointType, size) => {
 };
 
 const yCoordianate = (geometry, pointType, size) => {
-  console.log('yCoordianate',{geometry, pointType, size});
   const {y, sizeY } = geometry;
   switch(pointType){
   case "NW":
@@ -165,7 +163,7 @@ class Point extends React.Component{
     });
 
       const x = xCoordianate ( geometry, orientation, newSizeX);
-      const y = yCoordianate ( geometry,  orientation, newSizeY);
+      const y = yCoordianate ( geometry, orientation, newSizeY);
 
       this.props.handleSizeChange.update({
         x,
