@@ -19,7 +19,7 @@ class Photo extends React.Component{
     imagePreviewUrl: ''
   }
 
-  _handleSubmit(e){
+  _handleSubmit=(e)=>{
     e.preventDefault();
     if(this.state.file){
       this.props.actions.blockCreate(
@@ -30,15 +30,13 @@ class Photo extends React.Component{
         },
         {
           sizeX: 200,
-          sizeY: 200,
-          x:0,
-          y:0
+          sizeY: 200
         });
 
-      this.props.actions.hideDialog();
+      this.props.actions.dialogHide();
     }}
 
-  _handleImageChange(e){
+  _handleImageChange=(e)=>{
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
@@ -89,5 +87,12 @@ class Photo extends React.Component{
     );
   }
 }
+
+Photo.propTypes ={
+  actions: PropTypes.shape({
+    blockCreate: PropTypes.func.isRequired,
+    dialogHide: PropTypes.func.isRequired,
+  }).isRequired
+};
 
 export default PhotoContextWrapper;

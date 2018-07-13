@@ -1,6 +1,6 @@
 import {
-  DIALOG_OPEN,
-  DIALOG_CLOSE
+  DIALOG_SHOW,
+  DIALOG_HIDE
 } from '../constants/Dialog';
 
 const initialState = {
@@ -10,13 +10,13 @@ const initialState = {
 
 const Dialog = (state = initialState, action) =>{
   switch(action.type){
-  case DIALOG_OPEN:
+  case DIALOG_SHOW:
     return {
       ...state,
       open: true,
       type: action.content
     };
-  case DIALOG_CLOSE:
+  case DIALOG_HIDE:
     return {
       ...state,
       open: false,

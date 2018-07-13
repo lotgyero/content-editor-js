@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class PhotoThumbnail extends React.Component{
+class Thumbnail extends React.Component {
 
   render(){
-
     const {
       sizeX,
       sizeY
@@ -14,16 +13,22 @@ class PhotoThumbnail extends React.Component{
       height: `${sizeY-20}px`,
       width: `${sizeX-20}px`
     };
-    return(<img draggable="false" style={style} src={this.props.data.dataUri} alt="thumbnail"/>);
+    return(
+        <div className="thumbnail" draggable="false" >
+        <img draggable="false" style={style} src={this.props.data.dataUri} alt="thumbnail"/>
+      </div>);
   }
 };
 
-PhotoThumbnail.propTypes = {
-  data: PropTypes.object.isRequired,
+Thumbnail.propTypes = {
+  data: PropTypes.shape({
+    dataUri: PropTypes.string.isRequired
+  }),
   geometry: PropTypes.shape({
     sizeX: PropTypes.number.isRequired,
     sizeY: PropTypes.number.isRequired
   }).isRequired
 };
 
-export default PhotoThumbnail;
+
+export default Thumbnail;

@@ -1,17 +1,17 @@
 import {
-  DIALOG_OPEN,
-  DIALOG_CLOSE
+  DIALOG_SHOW,
+  DIALOG_HIDE
 } from '../constants/Dialog';
 
-export const showDialog = ( type ) =>{
+export const dialogShow = ( type ) =>{
   return {
-    type: DIALOG_OPEN,
+    type: DIALOG_SHOW,
     content: type
   };
 };
 
-export const hideDialog = () =>{
+export const dialogHide = () =>{
   return {
-    type: DIALOG_CLOSE
+    type: DIALOG_HIDE
   };
 };

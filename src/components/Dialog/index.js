@@ -1,18 +1,16 @@
 import React from 'react';
-import { createContext}  from 'react';
 import PropTypes from 'prop-types';
 
 import Photo from './Photo';
 import Video from './Video';
 
-const DialogActionContext = React.createContext ();
+const DialogActionContext = React.createContext();
 
 class Dialog extends React.Component{
 
   _showDialog=(e)=>{
     switch(this.props.type){
     case 'Photo':{
-      console.log(this.context);
         return (<Photo  />);
       }
       case 'Video':{
@@ -24,12 +22,8 @@ class Dialog extends React.Component{
     }
   };
   render(){
-    const actions ={
-      blockCreate : this.props.blockCreate,
-      hideDialog: this.props.hideDialog
-    };
     return(
-        <DialogActionContext.Provider value={actions}>
+        <DialogActionContext.Provider value={this.props.actions}>
         <form className={this.props.open ? "selector-dialog":"selector-dialog-hide"}>
         {this._showDialog()}
       </form>
@@ -37,6 +31,15 @@ class Dialog extends React.Component{
        );
   }
 }
+
+Dialog.propTypes ={
+  actions: PropTypes.shape({
+    dialogHide: PropTypes.func.isRequired,
+    blockCreate: PropTypes.func.isRequired
+  }),
+  open: PropTypes.bool.isRequired,
+  type: PropTypes.oneOf(["Photo", "Video"])
+};
 
 export default Dialog;
 // export { Consumer };

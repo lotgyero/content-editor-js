@@ -3,10 +3,6 @@ import Block from './Block';
 
 const EditingSpaceContext = React.createContext ();
 
-      //   blockSelect={this.props.blockSelect}
-      // blockMove={this.props.blockMove}
-      // blockResize={this.props.blockResize}
-
 class EditingSpace extends React.Component{
   _createBlock=(block, id)=>{
 
@@ -17,7 +13,6 @@ class EditingSpace extends React.Component{
         type={block.type}
         data={block.data}
         geometry={block.geometry}
-
         />
         </EditingSpaceContext.Provider>
     );
@@ -35,6 +30,7 @@ class EditingSpace extends React.Component{
     );
   }
 }
+
 
 export default  EditingSpace ;
 export { EditingSpaceContext };
