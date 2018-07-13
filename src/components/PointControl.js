@@ -19,36 +19,37 @@ const isProportional =(type)=>{
     }
 };
 
-
 const xCoordianate = ( geometry, pointType, size) => {
-
+  console.log('xCoordianate',{geometry, pointType, size});
+  const {x, sizeX} = geometry;
   switch(pointType){
   case "NW":
-    return geometry.x + geometry.sizeX - size  ;
+    return x + sizeX - size  ;
   case "NE":
-    return geometry.x;
+    return x;
   case "SW":
-    return geometry.sizeX - size + geometry.x;
+    return x + sizeX - size ;
   case "SE":
-    return geometry.x;
+    return x;
   default:
-    return geometry.x;
+    return x;
   }
 };
 
 const yCoordianate = (geometry, pointType, size) => {
-
+  console.log('yCoordianate',{geometry, pointType, size});
+  const {y, sizeY } = geometry;
   switch(pointType){
   case "NW":
-    return geometry.sizeY - size + geometry.y;
+    return y + sizeY - size;
   case "NE":
-    return geometry.sizeY - size + geometry.y;
+    return y + sizeY - size;
   case "SW":
-    return geometry.y;
+    return y;
   case "SE":
-    return geometry.y;
+    return y;
   default:
-    return geometry.y;
+    return y;
   }
 };
 
@@ -61,7 +62,7 @@ const calcSize = ({clientX, clientY, proportional, geometry, orientation })=>{
 
   switch(orientation){
   case"NW":
-    newSizeX =  sizeX - clientX + x;
+    newSizeX = sizeX - clientX + x;
     newSizeY = sizeY - clientY + y ;
     break;
   case"NE":
@@ -162,8 +163,10 @@ class Point extends React.Component{
       geometry,
       orientation
     });
-      const x = xCoordianate ( geometry, this.props.block.type , newSizeX);
-      const y = xCoordianate ( geometry, this.props.block.type , newSizeY);
+
+      const x = xCoordianate ( geometry, orientation, newSizeX);
+      const y = yCoordianate ( geometry,  orientation, newSizeY);
+
       this.props.handleSizeChange.update({
         x,
         y,

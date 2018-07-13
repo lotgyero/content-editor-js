@@ -108,18 +108,8 @@ const Blocks = (state = initialState, action) =>{
           return id === action.block.id ?
           {...block, geometry:{
             ...block.geometry,
-            x: xCoordianate(
-              state.blocks,
-              action.block.id,
-              action.block.pointType,
-              action.block.sizeX
-            ),
-            y: yCoordianate(
-              state.blocks,
-              action.block.id,
-              action.block.pointType,
-              action.block.sizeY
-            ),
+            x: action.block.x,
+            y: action.block.x,
             sizeX: action.block.sizeX,
             sizeY: action.block.sizeY
           }}
