@@ -54,7 +54,7 @@ class ContentBlock extends React.Component {
   }
   handleSizeChangeStop=({id, orientation})=>{
     this.setState({
-      sizeChange: false
+      sizeChange: false,
     });
     this.props.actions.blockResize(
       id,
@@ -86,6 +86,7 @@ class ContentBlock extends React.Component {
     const {clientX, clientY } = e;
     const newClientX =  clientX - this.state.clientX;
     const newClientY =  clientY - this.state.clientY;
+
     this.props.actions.blockMove(this.props.id, newClientX, newClientY);
   }
 

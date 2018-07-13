@@ -78,7 +78,7 @@ const Blocks = (state = initialState, action) =>{
           {...block, geometry:{
             ...block.geometry,
             x: action.block.x,
-            y: action.block.x,
+            y: action.block.y,
             sizeX: action.block.sizeX,
             sizeY: action.block.sizeY
           }}

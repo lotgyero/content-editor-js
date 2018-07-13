@@ -149,18 +149,18 @@ class Point extends React.Component{
   _handleOnDrag=(e)=>{
     const {clientX, clientY } = e;
     if(clientX >0 && clientX>0){
-    const { geometry } = this.props.block;
-    const { orientation }  = this.props;
-    const {
-      newSizeX,
-      newSizeY
-    } = calcSize({
-      clientX,
-      clientY,
-      proportional: isProportional(this.props.block.type),
-      geometry,
-      orientation
-    });
+      const { geometry } = this.props.block;
+      const { orientation }  = this.props;
+      const {
+        newSizeX,
+        newSizeY
+      } = calcSize({
+        clientX,
+        clientY,
+        proportional: isProportional(this.props.block.type),
+        geometry,
+        orientation
+      });
 
       const x = xCoordianate ( geometry, orientation, newSizeX);
       const y = yCoordianate ( geometry, orientation, newSizeY);
@@ -168,17 +168,21 @@ class Point extends React.Component{
       this.props.handleSizeChange.update({
         x,
         y,
-      newSizeX,
-      newSizeY
-    });}
+        newSizeX,
+        newSizeY
+      });
+    }
   }
-  _handleOnDragEnd=()=>{
+
+  _handleOnDragEnd=(e)=>{
     const { orientation }  = this.props;
-   this.props.handleSizeChange.stop({
-      id: this.props.id,
-      orientation
-    });
-  }
+
+      this.props.handleSizeChange.stop({
+        id: this.props.id,
+        orientation
+      });
+    }
+
   _hadleOnClick=()=>{
     this.props.handleSizeChange.start();
   }
