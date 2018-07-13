@@ -103,7 +103,7 @@ class Point extends React.Component{
 
     if(proportional){
       let newReSizeX =  newSizeX / sizeX;
-      let newReSizeY =  newSizeX / sizeX;
+      let newReSizeY =  newSizeY / sizeY;
       let mashResize = newReSizeX < newReSizeY ? newReSizeX : newReSizeY;
       newSizeX = Math.floor(newSizeX * mashResize);
       newSizeY = Math.floor(newSizeY * mashResize);
