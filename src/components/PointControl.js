@@ -75,7 +75,6 @@ class Point extends React.Component{
 
     switch(this.props.orientation){
     case"NW":
-
         newSizeX =  sizeX - clientX + x;
         newSizeY = sizeY - clientY + y ;
       break;
@@ -138,29 +137,17 @@ const PointWrapper = (props) =>{
 
 class PointControl extends React.Component{
   render(){
+    const orientation =["NW", "NE", "SW", "SE"];
     return(
         <div>
-
-        <PointWrapper
-      orientation="NW"
-      id={this.props.id}
-      block={this.props.block}/>
-
-        <PointWrapper
-      orientation="NE"
-      id={this.props.id}
-      block={this.props.block}/>
-
-        <PointWrapper
-      orientation="SW"
-      id={this.props.id}
-      block={this.props.block}/>
-
-        <PointWrapper
-      orientation="SE"
-      id={this.props.id}
-      block={this.props.block}/>
-
+        {orientation.map((or)=>{
+          return(
+              <PointWrapper
+            key={or}
+            orientation={or}
+            id={this.props.id}
+            block={this.props.block}/>);
+        })}
         </div>);
   }
 };
