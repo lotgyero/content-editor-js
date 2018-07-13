@@ -56,7 +56,7 @@ class ContentBlock extends React.Component {
     console.log(this.props.actions);
     return(
       <div style={style} className="content-block">
-        <PointControl block={this.props.block}  id={this.props.id} />
+        <PointControl block={this.props.block} id={this.props.id} />
         <div
           draggable="true"
           className="contentBlock"

@@ -72,7 +72,7 @@ const Blocks = (state = initialState, action) =>{
            x: getX(state.blocks),
            y: getY(state.blocks),
            sizeX: 200,
-           sizeY: 200
+           sizeY: 300
          }
         }
       ]

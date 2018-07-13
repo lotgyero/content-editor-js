@@ -6,7 +6,7 @@ W          E
      S
 */
 import React from 'react';
-import {EditingSpaceContext} from './EditingSpace';
+import { EditingSpaceContext } from './EditingSpace';
 
 const styleNW ={
   left: 0,
@@ -56,11 +56,11 @@ class Point extends React.Component{
   }
   _handleOnDragEnd=(e)=>{
     const {clientX, clientY } = e;
-    let sizeX;
-    let sizeY;
+    let newSizeX;
+    let newSizeY;
     let proportional = false;
 
-    switch(this.props.type){
+    switch(this.props.block.type){
     case "Photo":
       proportional = true;
       break;
@@ -71,33 +71,49 @@ class Point extends React.Component{
       proportional = false;
     };
 
+    const { x, y, sizeX, sizeY} = this.props.block.geometry;
+
     switch(this.props.orientation){
     case"NW":
-      sizeX =  this.props.geometry.sizeX - clientX + this.props.geometry.x;
-      sizeY = this.props.geometry.sizeY - clientY + this.props.geometry.y ;
+
+        newSizeX =  sizeX - clientX + x;
+        newSizeY = sizeY - clientY + y ;
+
       break;
     case"NE":
-      sizeX = clientX - this.props.geometry.x;
-      sizeY = this.props.geometry.y - clientY + this.props.geometry.sizeY ;
+
+        newSizeX = clientX - x;
+        newSizeY = y - clientY + sizeY ;
+
       break;
     case"SW":
-      sizeX = this.props.geometry.x - clientX + this.props.geometry.sizeX ;
-      sizeY = clientY - this.props.geometry.y;
+
+        newSizeX = x - clientX + sizeX ;
+        newSizeY = clientY - y;
+
       break;
     case"SE":
-      sizeX = clientX - this.props.geometry.x;
-      sizeY = clientY - this.props.geometry.y;
+        newSizeX = clientX - x;
+       newSizeY = clientY - y;
+
       break;
     default:
       break;
     }
 
     if(proportional){
-      let newSize = sizeX < sizeY ? sizeX: sizeY;
-      this.props.actions.blockResize( this.props.id, newSize, newSize, this.props.orientation);
-    } else {
-      this.props.actions.blockResize( this.props.id, sizeX, sizeY, this.props.orientation);
+      let newReSizeX =  newSizeX / sizeX;
+      let newReSizeY =  newSizeX / sizeX;
+      let mashResize = newReSizeX < newReSizeY ? newReSizeX : newReSizeY;
+      newSizeX = Math.floor(newSizeX * mashResize);
+      newSizeY = Math.floor(newSizeY * mashResize);
     }
+
+    this.props.actions.blockResize(
+      this.props.id,
+      newSizeX,
+      newSizeY,
+      this.props.orientation);
   }
   render(){
     return(
@@ -133,30 +149,22 @@ class PointControl extends React.Component{
         <PointWrapper
       orientation="NW"
       id={this.props.id}
-      type={this.props.type}
-      blockResize={this.props.blockResize}
-      geometry={this.props.geometry} />
+      block={this.props.block}/>
 
         <PointWrapper
       orientation="NE"
       id={this.props.id}
-      type={this.props.type}
-      blockResize={this.props.blockResize}
-      geometry={this.props.geometry} />
+      block={this.props.block}/>
 
         <PointWrapper
       orientation="SW"
       id={this.props.id}
-      type={this.props.type}
-      blockResize={this.props.blockResize}
-      geometry={this.props.geometry} />
+      block={this.props.block}/>
 
         <PointWrapper
       orientation="SE"
       id={this.props.id}
-      type={this.props.type}
-      blockResize={this.props.blockResize}
-      geometry={this.props.geometry} />
+      block={this.props.block}/>
 
         </div>);
   }
