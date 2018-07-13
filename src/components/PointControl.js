@@ -60,20 +60,20 @@ const calcSize = ({clientX, clientY, proportional, geometry, orientation })=>{
 
   switch(orientation){
   case"NW":
-    newSizeX = sizeX - clientX + x;
-    newSizeY = sizeY - clientY + y ;
+    newSizeX = + x  - clientX + sizeX;
+    newSizeY = + y  - clientY + sizeY;
     break;
   case"NE":
-    newSizeX = clientX - x;
-    newSizeY = y - clientY + sizeY ;
+    newSizeX = - x + clientX ;
+    newSizeY = + y - clientY + sizeY ;
     break;
   case"SW":
-    newSizeX = x - clientX + sizeX ;
-    newSizeY = clientY - y;
+    newSizeX = + x - clientX + sizeX ;
+    newSizeY = - y + clientY ;
     break;
   case"SE":
-    newSizeX = clientX - x;
-    newSizeY = clientY - y;
+    newSizeX = - x + clientX ;
+    newSizeY = - y + clientY ;
     break;
   default:
     break;
