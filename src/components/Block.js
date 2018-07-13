@@ -17,7 +17,25 @@ const ContentBlockWrapper = (props)=>{
 class ContentBlock extends React.Component {
   state={
     clientX: 0,
-    clientY: 0
+    clientY: 0,
+    sizeChange: false,
+    sizeX: this.props.block.geometry.sizeX,
+    sizeY: this.props.block.geometry.sizeY
+  }
+  handleSizeChangeStart=()=>{
+    console.log('Size change start');
+    this.setState({
+      sizeChange: true
+    });
+  }
+  handleSizeChangeStop=()=>{
+    console.log('Size change stop');
+    this.setState({
+      sizeChange: false
+    });
+  }
+  handleSizeUpdate=()=>{
+    console.log('Change size');
   }
   _handleOnDragEnd=(e)=>{
     const {clientX, clientY } = e;
@@ -53,10 +71,18 @@ class ContentBlock extends React.Component {
       left: x,
       top: y
     };
-    console.log(this.props.actions);
+    const actions ={
+        start: this.handleSizeChangeStart,
+        stop:  this.handleSizeChangeStop,
+        update:  this.handleSizeUpdate
+    };
     return(
       <div style={style} className="content-block">
-        <PointControl block={this.props.block} id={this.props.id} />
+        <PointControl
+      block={this.props.block}
+      id={this.props.id}
+      handleSizeChange={actions}
+        />
         <div
           draggable="true"
           className="contentBlock"

@@ -5,109 +5,141 @@ W          E
   SW   SE
      S
 */
+
 import React from 'react';
 import { EditingSpaceContext } from './EditingSpace';
+const isProportional =(type)=>{
+    switch(type){
+    case "Photo":
+      return true;
+      break;
+    case "Video":
+      return  false;
+      break;
+    default:
+      return false;
+    };
+};
+const calcSize = ({clientX, clientY, proportional, geometry, orientation })=>{
 
-const styleNW ={
-  left: 0,
-  top: 0
+  let newSizeX;
+  let newSizeY;
+
+  const { x, y, sizeX, sizeY} = geometry;
+
+  switch(orientation){
+  case"NW":
+    newSizeX =  sizeX - clientX + x;
+    newSizeY = sizeY - clientY + y ;
+    break;
+  case"NE":
+    newSizeX = clientX - x;
+    newSizeY = y - clientY + sizeY ;
+    break;
+  case"SW":
+    newSizeX = x - clientX + sizeX ;
+    newSizeY = clientY - y;
+    break;
+  case"SE":
+    newSizeX = clientX - x;
+    newSizeY = clientY - y;
+    break;
+  default:
+    break;
+  }
+
+  if(proportional){
+    let reSizeX =   newSizeX / sizeX;
+    let reSizeY =  newSizeY /sizeY ;
+    console.log({reSizeX, reSizeY});
+
+    let mashResize ;
+    if(reSizeX <1 && reSizeY < 1){
+      mashResize = reSizeX < reSizeY ? reSizeX : reSizeY;
+    } else {
+      mashResize = reSizeX > reSizeY ? reSizeX : reSizeY;
+    }
+
+    newSizeX = Math.floor(sizeX * mashResize);
+    newSizeY = Math.floor(sizeY * mashResize);
+  }
+
+  return {
+    newSizeX,
+    newSizeY
+  };
 };
 
-const styleNE ={
-  right: 0,
-  top: 0
+
+
+
+const style = {
+  NW: {
+    left: 0,
+    top: 0
+  },
+  NE: {
+    right: 0,
+    top: 0
+  },
+  SW: {
+    left: 0,
+    bottom: 0
+  },
+  SE: {
+    right: 0,
+    bottom: 0
+  },
+  center: {
+    right: '49%',
+    left: '49%',
+    top: '49%',
+    bottom: '49%'
+  }
 };
 
-const styleSW = {
-  left: 0,
-  bottom: 0
-};
-
-const styleSE ={
-  right: 0,
-  bottom: 0
-};
-
-const styleCenter ={
-  right: '49%',
-  left: '49%',
-  top: '49%',
-  bottom: '49%'
-};
 
 class Point extends React.Component{
   _getStyle=()=>{
     switch(this.props.orientation){
     case"NW":
-      return styleNW;
+      return style.NW;
     case"NE":
-      return styleNE;
+      return style.NE;
     case"SW":
-      return styleSW;
+      return style.SW;
     case"SE":
-      return styleSE;
+      return style.SE;
     default:
-      return styleCenter;
+      return style.center;
     }
   }
 
   _handleOnDragStart=(e)=>{
-    // const {clientX, clientY } = e;
+    const {clientX, clientY } = e;
+    this.props.handleSizeChange.start();
   }
   _handleOnDragEnd=(e)=>{
     const {clientX, clientY } = e;
-    let newSizeX;
-    let newSizeY;
-    let proportional = false;
 
-    switch(this.props.block.type){
-    case "Photo":
-      proportional = true;
-      break;
-    case "Video":
-      proportional = false;
-      break;
-    default:
-      proportional = false;
-    };
-
-    const { x, y, sizeX, sizeY} = this.props.block.geometry;
-
-    switch(this.props.orientation){
-    case"NW":
-        newSizeX =  sizeX - clientX + x;
-        newSizeY = sizeY - clientY + y ;
-      break;
-    case"NE":
-        newSizeX = clientX - x;
-        newSizeY = y - clientY + sizeY ;
-      break;
-    case"SW":
-        newSizeX = x - clientX + sizeX ;
-        newSizeY = clientY - y;
-      break;
-    case"SE":
-      newSizeX = clientX - x;
-      newSizeY = clientY - y;
-      break;
-    default:
-      break;
-    }
-
-    if(proportional){
-      let reSizeX =   newSizeX / sizeX;
-      let reSizeY =  newSizeY /sizeY ;
-      console.log({reSizeX, reSizeY});
-      let mashResize = reSizeX > reSizeY ? reSizeX : reSizeY;
-      newSizeX = Math.floor(sizeX * mashResize);
-      newSizeY = Math.floor(sizeY * mashResize);
-    }
+    const { geometry } = this.props.block;
+    const { orientation }  = this.props;
+    const {
+      newSizeX,
+      newSizeY
+    } = calcSize({
+      clientX,
+      clientY,
+      proportional: isProportional(this.props.block.type),
+      geometry,
+      orientation
+    });
 
     this.props.actions.blockResize(
       this.props.id,
       newSizeX,
       newSizeY,
-      this.props.orientation);
+      orientation);
   }
   render(){
     return(
@@ -146,7 +178,9 @@ class PointControl extends React.Component{
             key={or}
             orientation={or}
             id={this.props.id}
-            block={this.props.block}/>);
+            block={this.props.block}
+            handleSizeChange={this.props.handleSizeChange}
+              />);
         })}
         </div>);
   }
