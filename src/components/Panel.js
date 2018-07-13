@@ -11,8 +11,8 @@ class Panel extends React.Component{
   render(){
     return(
       <form>
-        <Button label="Фото" onClick={this.showPhoto} />
-        <Button label="Видео" onClick={this.showVideo} />
+        <Button label="добавить фото" onClick={this.showPhoto} />
+        <Button label="добавить видео" onClick={this.showVideo} />
       </form>);
   }
 }
