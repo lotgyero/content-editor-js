@@ -78,35 +78,30 @@ class Point extends React.Component{
 
         newSizeX =  sizeX - clientX + x;
         newSizeY = sizeY - clientY + y ;
-
       break;
     case"NE":
-
         newSizeX = clientX - x;
         newSizeY = y - clientY + sizeY ;
-
       break;
     case"SW":
-
         newSizeX = x - clientX + sizeX ;
         newSizeY = clientY - y;
-
       break;
     case"SE":
-        newSizeX = clientX - x;
-       newSizeY = clientY - y;
-
+      newSizeX = clientX - x;
+      newSizeY = clientY - y;
       break;
     default:
       break;
     }
 
     if(proportional){
-      let newReSizeX =  newSizeX / sizeX;
-      let newReSizeY =  newSizeY / sizeY;
-      let mashResize = newReSizeX < newReSizeY ? newReSizeX : newReSizeY;
-      newSizeX = Math.floor(newSizeX * mashResize);
-      newSizeY = Math.floor(newSizeY * mashResize);
+      let reSizeX =   newSizeX / sizeX;
+      let reSizeY =  newSizeY /sizeY ;
+      console.log({reSizeX, reSizeY});
+      let mashResize = reSizeX > reSizeY ? reSizeX : reSizeY;
+      newSizeX = Math.floor(sizeX * mashResize);
+      newSizeY = Math.floor(sizeY * mashResize);
     }
 
     this.props.actions.blockResize(
