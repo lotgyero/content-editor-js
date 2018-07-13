@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Block from './Block';
 
 const EditingSpaceContext = React.createContext ();
@@ -9,10 +11,8 @@ class EditingSpace extends React.Component{
     return(
         <EditingSpaceContext.Provider key={id} value={{actions: this.props.actions}}>
       <Block
-        id={id}
-        type={block.type}
-        data={block.data}
-        geometry={block.geometry}
+      id={id}
+        block={block}
         />
         </EditingSpaceContext.Provider>
     );
@@ -31,6 +31,20 @@ class EditingSpace extends React.Component{
   }
 }
 
+EditingSpace.propTypes ={
+  block: PropTypes.arrayOf(
+    PropTypes.shape({
+      data: PropTypes.shape({
+        dataUri: PropTypes.string.isRequired
+      }),
+      geometry: PropTypes.shape({
+        sizeX: PropTypes.number.isRequired,
+        sizeY: PropTypes.number.isRequired
+      }).isRequired,
+      type: PropTypes.string.isRequired
+    })
+  )
+};
 
 export default  EditingSpace ;
 export { EditingSpaceContext };

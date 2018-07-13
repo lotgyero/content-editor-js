@@ -7,7 +7,7 @@ class Thumbnail extends React.Component {
     const {
       sizeX,
       sizeY
-    } = this.props.geometry;
+    } = this.props.block.geometry;
 
     const style={
       height: `${sizeY-20}px`,
@@ -15,18 +15,20 @@ class Thumbnail extends React.Component {
     };
     return(
         <div className="thumbnail" draggable="false" >
-        <img draggable="false" style={style} src={this.props.data.dataUri} alt="thumbnail"/>
+        <img draggable="false" style={style} src={this.props.block.data.dataUri} alt="thumbnail"/>
       </div>);
   }
 };
 
 Thumbnail.propTypes = {
-  data: PropTypes.shape({
-    dataUri: PropTypes.string.isRequired
-  }),
-  geometry: PropTypes.shape({
-    sizeX: PropTypes.number.isRequired,
-    sizeY: PropTypes.number.isRequired
+  block: PropTypes.shape({
+    data: PropTypes.shape({
+      dataUri: PropTypes.string.isRequired
+    }),
+    geometry: PropTypes.shape({
+      sizeX: PropTypes.number.isRequired,
+      sizeY: PropTypes.number.isRequired
+    }).isRequired
   }).isRequired
 };
 

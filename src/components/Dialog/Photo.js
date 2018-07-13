@@ -52,16 +52,18 @@ class Photo extends React.Component{
     }
   }
   _showThumbnail=()=>{
+    const block = {
+      type: "Photo",
+      data: { dataUri: this.state.imagePreviewUrl},
+      geometry: {
+        sizeX: 200,
+        sizeY: 200,
+        x:0,
+        y:0
+      }
+    };
     return(
-      <Thumbnail
-        type="Photo"
-        data={{ dataUri: this.state.imagePreviewUrl}}
-        geometry={{
-          sizeX: 200,
-          sizeY: 200,
-          x:0,
-          y:0
-        }} />);
+        <Thumbnail block={block} />);
   };
   render(){
     console.log(this.context);

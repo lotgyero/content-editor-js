@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Button extends React.Component{
   _handleSubmit=(e)=>{
@@ -12,5 +13,9 @@ class Button extends React.Component{
       </button>);
   }
 }
+
+Button.propTypes = {
+  label: PropTypes.string.isRequired
+};
 
 export default Button;

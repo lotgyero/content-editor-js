@@ -28,9 +28,10 @@ class ContentBlock extends React.Component {
 
   _handleOnDragStart=(e)=>{
     const {clientX, clientY } = e;
+    const {x, y }= this.props.block.geometry;
     this.setState({
-      clientX:  clientX - this.props.geometry.x,
-      clientY:  clientY - this.props.geometry.y
+      clientX:  clientX - x,
+      clientY:  clientY - y
     });
   }
 
@@ -44,7 +45,7 @@ class ContentBlock extends React.Component {
       sizeY,
       x,
       y
-    } = this.props.geometry;
+    } = this.props.block.geometry;
     const style={
       height: sizeY,
       width: sizeX,
@@ -55,14 +56,14 @@ class ContentBlock extends React.Component {
     console.log(this.props.actions);
     return(
       <div style={style} className="content-block">
-        <PointControl type={this.props.type} geometry={this.props.geometry}  id={this.props.id} />
+        <PointControl block={this.props.block}  id={this.props.id} />
         <div
           draggable="true"
           className="contentBlock"
           onDragStart={this._handleOnDragStart}
           onDragEnd={this._handleOnDragEnd}
         >
-          <Thumbnail data={this.props.data} type={this.props.type} geometry={this.props.geometry} />
+        <Thumbnail block={this.props.block}  />
         </div>
       </div>
     );
@@ -70,15 +71,17 @@ class ContentBlock extends React.Component {
 };
 
 ContentBlock.propTypes = {
-  type: PropTypes.oneOf(["Photo", "Video"]).isRequired,
-  data: PropTypes.shape({
-    dataUri: PropTypes.string.isRequired
-  }).isRequired,
-  geometry: PropTypes.shape({
-    sizeX: PropTypes.number.isRequired,
-    sizeY: PropTypes.number.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired
+  block : PropTypes.shape({
+    type: PropTypes.oneOf(["Photo", "Video"]).isRequired,
+    data: PropTypes.shape({
+      dataUri: PropTypes.string.isRequired
+    }).isRequired,
+    geometry: PropTypes.shape({
+      sizeX: PropTypes.number.isRequired,
+      sizeY: PropTypes.number.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired
+    }).isRequired
   }).isRequired
 };
 

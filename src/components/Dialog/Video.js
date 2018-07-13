@@ -37,7 +37,7 @@ class Video extends React.Component{
         dataUri: this.state.dataUri
       },
       {
-        sizeX: 200,
+        sizeX: 300,
         sizeY: 200
       }
     );
@@ -56,22 +56,23 @@ class Video extends React.Component{
     });
   };
   render(){
-
-    return(
-      <div>
-        <input type='text'onChange={this._inputChange} value={this.state.uri}/>
-        <input type="submit" value="Создать" onClick={this._inputCreate}/>
-        <Thumbnail type="Video"
-      data={{
-          dataUri: this.state.dataUri
-        }}
-      geometry={{
+    const block = {
+      type: "Video",
+      data: {
+        dataUri: this.state.dataUri
+      },
+      geometry: {
         sizeX: 200,
         sizeY: 200,
         x:0,
         y:0
-      }}
-        />
+      }
+    };
+    return(
+      <div>
+        <input type='text'onChange={this._inputChange} value={this.state.uri}/>
+        <input type="submit" value="Создать" onClick={this._inputCreate}/>
+        <Thumbnail block={block}/>
         </div>
     );
   }
