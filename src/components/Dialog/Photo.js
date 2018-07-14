@@ -20,20 +20,27 @@ class Photo extends React.Component {
 
   _handleSubmit = e => {
     e.preventDefault();
+    const photoThis = this;
     if (this.state.file) {
-      this.props.actions.blockCreate(
-        'Photo',
-        {
-          file: this.state.file,
-          dataUri: this.state.imagePreviewUrl
-        },
-        {
-          sizeX: 200,
-          sizeY: 200
-        }
-      );
-
-      this.props.actions.dialogHide();
+      const dumpImg = document.createElement('img');
+      let sizeX, sizeY;
+      dumpImg.onload = function() {
+        sizeX = this.width;
+        sizeY = this.height;
+        photoThis.props.actions.blockCreate(
+          'Photo',
+          {
+            file: photoThis.state.file,
+            dataUri: photoThis.state.imagePreviewUrl
+          },
+          {
+            sizeX,
+            sizeY
+          }
+        );
+        photoThis.props.actions.dialogHide();
+      };
+      dumpImg.src = this.state.imagePreviewUrl;
     }
   };
 
@@ -55,7 +62,9 @@ class Photo extends React.Component {
   _showThumbnail = () => {
     const block = {
       type: 'Photo',
-      data: { dataUri: this.state.imagePreviewUrl },
+      data: {
+        dataUri: this.state.imagePreviewUrl
+      },
       geometry: {
         sizeX: 200,
         sizeY: 200,

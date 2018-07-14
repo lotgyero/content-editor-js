@@ -17,8 +17,8 @@ const mapDispatchToProps = dispatch => {
       dialogHide: () => {
         dispatch(dialogHide());
       },
-      blockCreate: (type, block) => {
-        dispatch(blockCreate(type, block));
+      blockCreate: (type, block, geometry) => {
+        dispatch(blockCreate(type, block, geometry));
       }
     }
   };

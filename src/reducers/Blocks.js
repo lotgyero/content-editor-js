@@ -42,8 +42,8 @@ const Blocks = (state = initialState, action) => {
             geometry: {
               x: getX(state.blocks),
               y: getY(state.blocks),
-              sizeX: 200,
-              sizeY: 300
+              sizeX: action.geometry.sizeX,
+              sizeY: action.geometry.sizeY
             }
           }
         ]

@@ -24,23 +24,31 @@ const VideoContextWrapper = props => {
 class Video extends React.Component {
   state = {
     uri: 'https://youtu.be/9bZkp7q19f0',
-    dataUri: getThumbnailURI('https://youtu.be/9bZkp7q19f0')
+    imagePreviewUrl: getThumbnailURI('https://youtu.be/9bZkp7q19f0')
   };
 
   _inputCreate = e => {
     e.preventDefault();
-    this.props.actions.blockCreate(
-      'Video',
-      {
-        uri: this.state.uri,
-        dataUri: this.state.dataUri
-      },
-      {
-        sizeX: 300,
-        sizeY: 200
-      }
-    );
-    this.props.actions.dialogHide();
+    const videoThis = this;
+    const dumpImg = document.createElement('img');
+    let sizeX, sizeY;
+    dumpImg.onload = function() {
+      sizeX = this.width;
+      sizeY = this.height;
+      videoThis.props.actions.blockCreate(
+        'Video',
+        {
+          uri: videoThis.state.uri,
+          dataUri: videoThis.state.imagePreviewUrl
+        },
+        {
+          sizeX,
+          sizeY
+        }
+      );
+      videoThis.props.actions.dialogHide();
+    };
+    dumpImg.src = this.state.imagePreviewUrl;
   };
   _inputChange = e => {
     e.preventDefault();
@@ -50,7 +58,7 @@ class Video extends React.Component {
       return {
         ...prev,
         uri: value,
-        dataUri: getThumbnailURI(value)
+        imagePreviewUrl: getThumbnailURI(value)
       };
     });
   };
@@ -58,7 +66,7 @@ class Video extends React.Component {
     const block = {
       type: 'Video',
       data: {
-        dataUri: this.state.dataUri
+        dataUri: this.state.imagePreviewUrl
       },
       geometry: {
         sizeX: 200,

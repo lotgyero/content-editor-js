@@ -5,11 +5,12 @@ import {
   BLOCK_RESIZE
 } from '../constants/Blocks';
 
-export const blockCreate = (type, block) => {
+export const blockCreate = (type, block, geometry) => {
   return {
     type: BLOCK_CREATE,
     blockType: type,
-    block: block
+    block: block,
+    geometry: geometry
   };
 };
 
