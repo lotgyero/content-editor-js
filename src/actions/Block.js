@@ -5,8 +5,7 @@ import {
   BLOCK_RESIZE
 } from '../constants/Blocks';
 
-
-export const blockCreate = ( type, block  ) =>{
+export const blockCreate = (type, block) => {
   return {
     type: BLOCK_CREATE,
     blockType: type,
@@ -14,7 +13,7 @@ export const blockCreate = ( type, block  ) =>{
   };
 };
 
-export const blockSelect = ( type, block) =>{
+export const blockSelect = (type, block) => {
   return {
     type: BLOCK_SELECT,
     blockType: type,
@@ -22,16 +21,16 @@ export const blockSelect = ( type, block) =>{
   };
 };
 
-export const blockMove = (id, x, y)=>{
+export const blockMove = (id, x, y) => {
   return {
     type: BLOCK_MOVE,
-    block:{id, x, y }
+    block: { id, x, y }
   };
 };
 
-export const blockResize = (id, x, y, sizeX, sizeY, pointType)=>{
+export const blockResize = (id, x, y, sizeX, sizeY, pointType) => {
   return {
     type: BLOCK_RESIZE,
-    block:{ id, x, y, sizeX, sizeY , pointType}
+    block: { id, x, y, sizeX, sizeY, pointType }
   };
 };

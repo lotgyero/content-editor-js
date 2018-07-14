@@ -4,21 +4,20 @@ import Dialog from '../components/Dialog';
 import { dialogHide } from '../actions/Dialog';
 import { blockCreate } from '../actions/Block';
 
-
-const mapStateToProps = (state) => {
-  return{
+const mapStateToProps = state => {
+  return {
     open: state.Dialog.open,
     type: state.Dialog.type
   };
 };
 
-const mapDispatchToProps = ( dispatch )=>{
+const mapDispatchToProps = dispatch => {
   return {
-    actions:{
-      dialogHide: () =>{
+    actions: {
+      dialogHide: () => {
         dispatch(dialogHide());
       },
-      blockCreate: (type, block) =>{
+      blockCreate: (type, block) => {
         dispatch(blockCreate(type, block));
       }
     }

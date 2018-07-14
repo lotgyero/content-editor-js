@@ -6,21 +6,16 @@ import rootReducer from '../reducers';
 
 const configureStore = preloadedState => {
   let myCompose;
-  if(window && window.__REDUX_DEVTOOLS_EXTENSION__){
+  if (window && window.__REDUX_DEVTOOLS_EXTENSION__) {
     myCompose = compose(
-      applyMiddleware(thunk,  createLogger()),
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      applyMiddleware(thunk, createLogger()),
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()
     );
   } else {
-    myCompose = compose(
-      applyMiddleware(thunk,  createLogger())
-    );
+    myCompose = compose(applyMiddleware(thunk, createLogger()));
   }
-  const store = createStore(
-    rootReducer,
-    preloadedState,
-    myCompose
-  );
+  const store = createStore(rootReducer, preloadedState, myCompose);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

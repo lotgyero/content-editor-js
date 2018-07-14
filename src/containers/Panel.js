@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import Panel from '../components/Panel';
 import { dialogShow } from '../actions/Dialog';
 
-const mapStateToProps = (state) => {
-  return{
+const mapStateToProps = state => {
+  return {
     open: state.Dialog.open,
     type: state.Dialog.type
   };
 };
 
-const mapDispatchToProps = ( dispatch )=>{
+const mapDispatchToProps = dispatch => {
   return {
-    showDialog: (type)=>{
+    showDialog: type => {
       dispatch(dialogShow(type));
     }
   };

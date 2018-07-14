@@ -3,19 +3,18 @@ import PropTypes from 'prop-types';
 
 import Thumbnail from './Thumbnail';
 import PointControl from './PointControl';
-import {EditingSpaceContext} from './EditingSpace';
+import { EditingSpaceContext } from './EditingSpace';
 
-const ContentBlockWrapper = (props)=>{
-  return(
+const ContentBlockWrapper = props => {
+  return (
     <EditingSpaceContext.Consumer>
-      {context => <ContentBlock {...props} actions={context.actions}/>}
+      {context => <ContentBlock {...props} actions={context.actions} />}
     </EditingSpaceContext.Consumer>
   );
 };
 
-
 class ContentBlock extends React.Component {
-  state={
+  state = {
     clientX: 0,
     clientY: 0,
     sizeChange: false,
@@ -25,11 +24,9 @@ class ContentBlock extends React.Component {
       sizeX: 0,
       sizeY: 0
     }
-  }
-  componentDidMount=()=>{
-    const {
-      x, y, sizeX, sizeY
-    } = this.props.block.geometry;
+  };
+  componentDidMount = () => {
+    const { x, y, sizeX, sizeY } = this.props.block.geometry;
     this.setState({
       geometry: {
         x,
@@ -40,7 +37,7 @@ class ContentBlock extends React.Component {
       sizeChange: false
     });
   };
-  handleSizeChangeStart=()=>{
+  handleSizeChangeStart = () => {
     this.setState({
       geometry: {
         ...this.state.geometry,
@@ -51,10 +48,10 @@ class ContentBlock extends React.Component {
       },
       sizeChange: true
     });
-  }
-  handleSizeChangeStop=({id, orientation})=>{
+  };
+  handleSizeChangeStop = ({ id, orientation }) => {
     this.setState({
-      sizeChange: false,
+      sizeChange: false
     });
     this.props.actions.blockResize(
       id,
@@ -64,61 +61,61 @@ class ContentBlock extends React.Component {
       this.state.geometry.sizeY,
       orientation
     );
-  }
-  handleSizeUpdate=(data)=>{
-    const {
-      x,
-      y,
-      newSizeX,
-      newSizeY
-    } = data;
+  };
+  handleSizeUpdate = data => {
+    const { x, y, newSizeX, newSizeY } = data;
     this.setState({
       sizeChange: true,
-      geometry:{
+      geometry: {
         ...this.state.geometry,
         x,
         y,
         sizeX: newSizeX,
         sizeY: newSizeY
-      }});
-  }
-  _handleOnDragEnd=(e)=>{
-    const {clientX, clientY } = e;
-    const newClientX =  clientX - this.state.clientX;
-    const newClientY =  clientY - this.state.clientY;
+      }
+    });
+  };
+  _handleOnDragEnd = e => {
+    const { clientX, clientY } = e;
+    const newClientX = clientX - this.state.clientX;
+    const newClientY = clientY - this.state.clientY;
 
     this.props.actions.blockMove(this.props.id, newClientX, newClientY);
-  }
+  };
 
-  _handleOnDragStart=(e)=>{
-    const {clientX, clientY } = e;
-    const {x, y }= this.props.block.geometry;
+  _handleOnDragStart = e => {
+    const { clientX, clientY } = e;
+    const { x, y } = this.props.block.geometry;
     this.setState({
-        clientX:  clientX - x,
-        clientY:  clientY - y
+      clientX: clientX - x,
+      clientY: clientY - y
     });
-  }
+  };
 
-  _selectBlock=()=>{
+  _selectBlock = () => {
     this.props.actions.blockSelect(this.props.type, this.props.id);
-  }
+  };
 
-  render(){
+  render() {
     // const {
     //   x,
     //   y
     // } = this.props.block.geometry;
-    const style={
+    const style = {
       height: this.state.geometry.sizeY,
       width: this.state.geometry.sizeX,
-      position: "absolute",
-      left: this.state.sizeChange ? this.state.geometry.x : this.props.block.geometry.x,
-      top: this.state.sizeChange ? this.state.geometry.y  :this.props.block.geometry.y
+      position: 'absolute',
+      left: this.state.sizeChange
+        ? this.state.geometry.x
+        : this.props.block.geometry.x,
+      top: this.state.sizeChange
+        ? this.state.geometry.y
+        : this.props.block.geometry.y
     };
-    const actions ={
-        start: this.handleSizeChangeStart,
-        stop:  this.handleSizeChangeStop,
-        update:  this.handleSizeUpdate
+    const actions = {
+      start: this.handleSizeChangeStart,
+      stop: this.handleSizeChangeStop,
+      update: this.handleSizeUpdate
     };
     const block = {
       ...this.props.block,
@@ -127,15 +124,15 @@ class ContentBlock extends React.Component {
         x: this.state.geometry.x,
         y: this.state.geometry.y,
         sizeX: this.state.geometry.sizeX,
-        sizeY: this.state.geometry.sizeY,
+        sizeY: this.state.geometry.sizeY
       }
     };
-    return(
+    return (
       <div style={style} className="content-block">
         <PointControl
-      block={this.props.block}
-      id={this.props.id}
-      handleSizeChange={actions}
+          block={this.props.block}
+          id={this.props.id}
+          handleSizeChange={actions}
         />
         <div
           draggable="true"
@@ -143,16 +140,16 @@ class ContentBlock extends React.Component {
           onDragStart={this._handleOnDragStart}
           onDragEnd={this._handleOnDragEnd}
         >
-        <Thumbnail block={block}  />
+          <Thumbnail block={block} />
         </div>
       </div>
     );
   }
-};
+}
 
 ContentBlock.propTypes = {
-  block : PropTypes.shape({
-    type: PropTypes.oneOf(["Photo", "Video"]).isRequired,
+  block: PropTypes.shape({
+    type: PropTypes.oneOf(['Photo', 'Video']).isRequired,
     data: PropTypes.shape({
       dataUri: PropTypes.string.isRequired
     }).isRequired,

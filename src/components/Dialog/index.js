@@ -6,39 +6,42 @@ import Video from './Video';
 
 const DialogActionContext = React.createContext();
 
-class Dialog extends React.Component{
-
-  _showDialog=(e)=>{
-    switch(this.props.type){
-    case 'Photo':{
-        return (<Photo  />);
+class Dialog extends React.Component {
+  _showDialog = () => {
+    switch (this.props.type) {
+      case 'Photo': {
+        return <Photo />;
       }
-      case 'Video':{
-        return (<Video  />);
+      case 'Video': {
+        return <Video />;
       }
-      default:{
-        return(<div />);
+      default: {
+        return <div />;
       }
     }
   };
-  render(){
-    return(
-        <DialogActionContext.Provider value={this.props.actions}>
-        <form className={this.props.open ? "selector-dialog":"selector-dialog-hide"}>
-        {this._showDialog()}
-      </form>
-        </DialogActionContext.Provider>
-       );
+  render() {
+    return (
+      <DialogActionContext.Provider value={this.props.actions}>
+        <form
+          className={
+            this.props.open ? 'selector-dialog' : 'selector-dialog-hide'
+          }
+        >
+          {this._showDialog()}
+        </form>
+      </DialogActionContext.Provider>
+    );
   }
 }
 
-Dialog.propTypes ={
+Dialog.propTypes = {
   actions: PropTypes.shape({
     dialogHide: PropTypes.func.isRequired,
     blockCreate: PropTypes.func.isRequired
   }),
   open: PropTypes.bool.isRequired,
-  type: PropTypes.oneOf(["Photo", "Video"])
+  type: PropTypes.oneOf(['Photo', 'Video'])
 };
 
 export default Dialog;

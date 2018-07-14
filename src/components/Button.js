@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Button extends React.Component{
-  _handleSubmit=(e)=>{
+class Button extends React.Component {
+  _handleSubmit = e => {
     e.preventDefault();
     this.props.onClick();
-  }
-  render(){
-    return(
-      <button onClick={this._handleSubmit}>
-      {this.props.label}
-      </button>);
+  };
+  render() {
+    return <button onClick={this._handleSubmit}>{this.props.label}</button>;
   }
 }
 

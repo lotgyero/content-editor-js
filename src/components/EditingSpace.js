@@ -3,35 +3,31 @@ import PropTypes from 'prop-types';
 
 import Block from './Block';
 
-const EditingSpaceContext = React.createContext ();
+const EditingSpaceContext = React.createContext();
 
-class EditingSpace extends React.Component{
-  _createBlock=(block, id)=>{
-
-    return(
-        <EditingSpaceContext.Provider key={id} value={{actions: this.props.actions}}>
-      <Block
-      id={id}
-        block={block}
-        />
-        </EditingSpaceContext.Provider>
+class EditingSpace extends React.Component {
+  _createBlock = (block, id) => {
+    return (
+      <EditingSpaceContext.Provider
+        key={id}
+        value={{ actions: this.props.actions }}
+      >
+        <Block id={id} block={block} />
+      </EditingSpaceContext.Provider>
     );
   };
-  render(){
-
-    return(
-        <div className="editing-space">
-        {this.props.blocks.map((block,  id)=>{
+  render() {
+    return (
+      <div className="editing-space">
+        {this.props.blocks.map((block, id) => {
           return this._createBlock(block, id);
-      })
-        }
-
+        })}
       </div>
     );
   }
 }
 
-EditingSpace.propTypes ={
+EditingSpace.propTypes = {
   block: PropTypes.arrayOf(
     PropTypes.shape({
       data: PropTypes.shape({
@@ -46,5 +42,5 @@ EditingSpace.propTypes ={
   )
 };
 
-export default  EditingSpace ;
+export default EditingSpace;
 export { EditingSpaceContext };
