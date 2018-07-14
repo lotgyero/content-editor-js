@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 /* import logo from '../logo.svg'; */
-import '../App.css';
+import './App.css';
 
-import Dialog from '../containers/Dialog';
-import Panel from '../containers/Panel';
-import EditingSpace from '../containers/EditingSpace';
+import Dialog from './containers/Dialog';
+import Panel from './containers/Panel';
+import EditingSpace from './containers/EditingSpace';
 
 class App extends Component {
   render() {
