@@ -29,24 +29,23 @@ class Video extends React.Component {
 
   _inputCreate = e => {
     e.preventDefault();
-    const videoThis = this;
-    const dumpImg = document.createElement('img');
+    const dumpImg = new Image();
     let sizeX, sizeY;
-    dumpImg.onload = function() {
-      sizeX = this.width;
-      sizeY = this.height;
-      videoThis.props.actions.blockCreate(
+    dumpImg.onload = () => {
+      sizeX = dumpImg.width;
+      sizeY = dumpImg.height;
+      this.props.actions.blockCreate(
         'Video',
         {
-          uri: videoThis.state.uri,
-          dataUri: videoThis.state.imagePreviewUrl
+          uri: this.state.uri,
+          dataUri: this.state.imagePreviewUrl
         },
         {
           sizeX,
           sizeY
         }
       );
-      videoThis.props.actions.dialogHide();
+      this.props.actions.dialogHide();
     };
     dumpImg.src = this.state.imagePreviewUrl;
   };

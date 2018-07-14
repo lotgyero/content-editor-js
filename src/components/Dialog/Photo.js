@@ -20,25 +20,24 @@ class Photo extends React.Component {
 
   _handleSubmit = e => {
     e.preventDefault();
-    const photoThis = this;
     if (this.state.file) {
-      const dumpImg = document.createElement('img');
+      const dumpImg = new Image();
       let sizeX, sizeY;
-      dumpImg.onload = function() {
-        sizeX = this.width;
-        sizeY = this.height;
-        photoThis.props.actions.blockCreate(
+      dumpImg.onload = () => {
+        sizeX = dumpImg.width;
+        sizeY = dumpImg.height;
+        this.props.actions.blockCreate(
           'Photo',
           {
-            file: photoThis.state.file,
-            dataUri: photoThis.state.imagePreviewUrl
+            file: this.state.file,
+            dataUri: this.state.imagePreviewUrl
           },
           {
             sizeX,
             sizeY
           }
         );
-        photoThis.props.actions.dialogHide();
+        this.props.actions.dialogHide();
       };
       dumpImg.src = this.state.imagePreviewUrl;
     }
